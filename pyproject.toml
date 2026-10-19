@@ -1,0 +1,26 @@
+[project]
+name = "ocr-local"
+version = "0.1.0"
+description = "Local OCR (vLLM) and schema-driven information extraction"
+authors = [
+    { name = "danghaido", email = "dohaidang1104@gmail.com" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.143.1",
+    "langfuse>=5.0.1",
+    "loguru>=0.7.3",
+    "markdownify>=1.2.3",
+    "openai>=3.31.0",
+    "pillow>=12.3.0",
+    "pydantic>=2.14.1",
+    "pymupdf>=1.28.2",
+    "python-dotenv>=1.2.4",
+    "python-multipart>=0.0.32",
+    "pyyaml>=6.0.3",
+    "requests>=2.34.2",
+    "uvicorn[standard]>=0.54.0",
+]
+
+[tool.uv]
+package = false

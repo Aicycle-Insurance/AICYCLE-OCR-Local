@@ -1,0 +1,28 @@
+[
+  {
+        "document_code": "citizen_identity_card",
+        "document_name": "Căn cước công dân / Căn cước",
+        "fields": [{"field_key" : "document_title", "data_type" : "string"}, {"field_key" : "national_id", "data_type" : "string"}, {"field_key" : "full_name", "data_type" : "string"}, {"field_key" : "date_of_birth", "data_type" : "string"}, {"field_key" : "gender", "data_type" : "string"}, {"field_key" : "nationality", "data_type" : "string"}, {"field_key" : "place_of_origin", "data_type" : "string"}, {"field_key" : "permanent_address", "data_type" : "string"}, {"field_key" : "place_of_residence", "data_type" : "string"}, {"field_key" : "place_of_birth_registration", "data_type" : "string"}, {"field_key" : "date_of_expiry", "data_type" : "string"}, {"field_key" : "personal_identification", "data_type" : "string"}, {"field_key" : "date_of_issue", "data_type" : "string"}, {"field_key" : "place_of_issue", "data_type" : "string"}]
+    },
+  {
+    "document_code": "medical_invoice",
+    "document_name": "Hóa đơn viện phí",
+    "fields": [
+      {"field_key": "invoice_number", "data_type": "string", "field_name": "Số hóa đơn"},
+      {"field_key": "invoice_date", "data_type": "date", "description": "Ngày lập hóa đơn, định dạng DD/MM/YYYY"},
+      {"field_key": "hospital_name", "data_type": "string", "field_name": "Tên cơ sở khám chữa bệnh / đơn vị bán"},
+      {"field_key": "patient_name", "data_type": "string", "field_name": "Họ tên người bệnh / người mua"},
+      {"field_key": "total_amount", "data_type": "number", "field_name": "Tổng tiền thanh toán"},
+      {
+        "field_key": "items",
+        "data_type": "array",
+        "field_name": "Bảng chi tiết dịch vụ / thuốc",
+        "child_schema": [
+          {"field_key": "name", "data_type": "string", "field_name": "Tên dịch vụ / thuốc"},
+          {"field_key": "quantity", "data_type": "number", "field_name": "Số lượng"},
+          {"field_key": "amount", "data_type": "number", "field_name": "Thành tiền"}
+        ]
+      }
+    ]
+  }
+]

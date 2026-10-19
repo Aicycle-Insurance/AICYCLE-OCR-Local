@@ -1,0 +1,58 @@
+# Cú pháp ${ENV_NAME:default}: lấy biến môi trường (hoặc từ file .env),
+# nếu không có thì dùng giá trị default phía sau dấu ':' (để trống = null).
+
+app:
+  data_dir: ${DATA_DIR:data}
+  log_dir: ${LOG_DIR:logs}
+  log_level: ${LOG_LEVEL:INFO}
+
+ocr:
+  # Engine OCR được dùng: chandra | dots_mocr
+  engine: ${OCR_ENGINE:chandra}
+  dpi: ${OCR_DPI:200}
+  max_concurrency: ${OCR_MAX_CONCURRENCY:8}
+  # Retry mỗi trang khi lỗi (timeout, mất kết nối, 5xx...), delay tăng gấp đôi sau mỗi lần
+  retry:
+    max_attempts: ${OCR_RETRY_MAX_ATTEMPTS:3}
+    initial_delay: ${OCR_RETRY_INITIAL_DELAY:2.0}
+    max_delay: ${OCR_RETRY_MAX_DELAY:30.0}
+  engines:
+    chandra:
+      base_url: ${CHANDRA_BASE_URL:http://localhost:8000/v1}
+      api_key: ${CHANDRA_API_KEY:EMPTY}
+      model: ${CHANDRA_MODEL:chandra}
+      timeout: ${CHANDRA_TIMEOUT:600}
+      temperature: 0.0
+      top_p: 0.1
+      max_tokens: 12384
+    dots_mocr:
+      base_url: ${DOTS_MOCR_BASE_URL:http://localhost:8001/v1}
+      api_key: ${DOTS_MOCR_API_KEY:EMPTY}
+      model: ${DOTS_MOCR_MODEL:rednote-hilab/dots.mocr}
+      timeout: ${DOTS_MOCR_TIMEOUT:600}
+      temperature: 0.1
+      top_p: 0.9
+      max_tokens: 32768
+
+llm:
+  base_url: ${LLM_BASE_URL:http://localhost:10100/v1}
+  api_key: ${LLM_API_KEY:EMPTY}
+  model: ${LLM_MODEL:nvidia/Gemma-4-26B-A4B-NVFP4}
+  timeout: ${LLM_TIMEOUT:600}
+  temperature: ${LLM_TEMPERATURE:0.0}
+  top_p: ${LLM_TOP_P:}
+  top_k: ${LLM_TOP_K:}
+  max_tokens: ${LLM_MAX_TOKENS:16384}
+  # Số request extraction (phase 2) chạy song song
+  max_concurrent_extractions: ${LLM_MAX_CONCURRENT_EXTRACTIONS:3}
+  # Số trang mỗi lần gọi phase 2 cho tài liệu dài có bảng (0 = tắt)
+  table_chunk_pages: ${LLM_TABLE_CHUNK_PAGES:2}
+  # Truyền thẳng vào extra_body của vLLM, ví dụ tắt thinking:
+  # chat_template_kwargs: {enable_thinking: false}
+  extra_body: {}
+
+langfuse:
+  enabled: ${LANGFUSE_ENABLED:false}
+  public_key: ${LANGFUSE_PUBLIC_KEY:}
+  secret_key: ${LANGFUSE_SECRET_KEY:}
+  base_url: ${LANGFUSE_BASE_URL:}

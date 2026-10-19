@@ -1,0 +1,5112 @@
+[
+  {
+    "task": 1,
+    "project": 5,
+    "model_version": "chandra_gemma4_v1",
+    "result": [
+      {
+        "from_name": "schema_type",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "vat_invoice"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__document_title",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "HÓA ĐƠN GIÁ TRỊ GIA TẶNG"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__invoice_serial",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "1K25TLD"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__invoice_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "00046644"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__healthcare_facility_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "PHÒNG KHÁM ĐA KHOA THU CÚC-CHI NHÁNH CÔNG TY CỔ PHẦN Y KHOA & THĂM MỸ THU CÚC"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__seller_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "PHÒNG KHÁM ĐA KHOA THU CÚC-CHI NHÁNH CÔNG TY CỔ PHẦN Y KHOA & THĂM MỸ THU CÚC"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__seller_tax_code",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "0102624215-015"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__seller_address",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Tầng hầm 1 và Tầng 1, Tòa nhà HH01, Eco Lakeview, Số 32 Đại Từ, Phường Định Công, Thành Phố Hà Nội, Việt Nam"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__buyer_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "PHAN LÊ TUỆ ANH"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__buyer_address",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Phường Yên Sở - Thành phố Hà Nội - Việt Nam"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__payment_method",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Chuyển khoản/Tiền mặt"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__vat_invoice_line_items",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "1, , Dịch vụ khám chữa bệnh, , 1, 857340, 857340, KCT, 0, , 0, 857340, 857340"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__vat_summary_table",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Cộng tiền hàng, , 857340, , 857340",
+            "Tiền thuế VAT, , , 0, 0"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__total_invoice_amount",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "857340.0"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__amount_in_words",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Tám trăm năm mươi bảy nghìn ba trăm bốn mươi đồng"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__invoice_lookup_code",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "THUCUC15.250718000046"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__invoice_lookup_link",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "http://bv.hoadon.thucuc.vn:880"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__has_seller_signature",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "true"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__has_buyer_signature",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__has_converter_signature",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__has_seller_stamp",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "task": 2,
+    "project": 5,
+    "model_version": "chandra_gemma4_v1",
+    "result": [
+      {
+        "from_name": "schema_type",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "vat_invoice"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__document_title",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "HÓA ĐƠN GIÁ TRỊ GIA TĂNG"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__invoice_serial",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "IC25MDP"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__invoice_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "15470"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__tax_authority_code",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "M1-25-YF0KP-00000015470"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__seller_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "CÔNG TY TNHH MỘT THÀNH VIÊN ĐƯỢC PHẨM VÀ TRANG THIẾT BỊ Y TẾ PHƯƠNG CHÂU"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__seller_tax_code",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "1801702066"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__seller_phone_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "02922 222 555"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__seller_address",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "300, Nguyễn Văn Cừ (nối dài), Phường An Khánh, Quận Ninh Kiều, Thành phố Cần Thơ, Việt Nam"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__seller_bank_account",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "1027397979"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__buyer_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "PHẠM THỊ TÚ TRINH"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__buyer_address",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Ấp Đồng Khôi, Xã Tân Ân Tây, Huyện Ngọc Hiến, Tỉnh Cà Mau"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__payment_method",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "TM/CK"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__vat_invoice_line_items",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "1, , Trical francese, Viên, 60, 7500, 450000, 8%, , 8%, , , ",
+            "2, , Prencare fort, Viên, 30, 7385, 221556, 8%, , 8%, , , "
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__vat_summary_table",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Cộng tiền hàng trước thuế, , 671556, 53724, 725280"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__total_invoice_amount",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "725280"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__amount_in_words",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "bảy trăm hai mươi lăm nghìn hai trăm tám mươi đồng"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__invoice_lookup_code",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "D4ZOJVE00L"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__invoice_lookup_link",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "https://portal.vnpayinvoice.vn"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__has_seller_signature",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "true"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__has_buyer_signature",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__has_converter_signature",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__has_seller_stamp",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "true"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "task": 3,
+    "project": 5,
+    "model_version": "chandra_gemma4_v1",
+    "result": [
+      {
+        "from_name": "schema_type",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "vat_invoice"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__document_title",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "HÓA ĐƠN GIÁ TRỊ GIA TĂNG"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__invoice_serial",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "1C25MBS"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__invoice_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "00084447"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__tax_authority_code",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "M1-25-RBUUL-00000084448"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__seller_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "CÔNG TY TNHH DƯỢC PHẨM THIẾT BỊ Y TẾ BÔNG SEN VÀNG"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__seller_tax_code",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "1801726370"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__seller_phone_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "02923 789 911 - 128"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__seller_address",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "26B đường số 8, Khu dân cư Hồng Phát, Phường An Bình, Quận Ninh Kiều, Thành phố Cần Thơ, Việt Nam"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__buyer_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "KIỀU THANH TUYỀN"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__buyer_address",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Khóm Bến Chuối Phường 1 Thị xã Duyên Hải Tỉnh Trà Vinh"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__payment_method",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Tiền mặt/Chuyển khoản"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__vat_invoice_line_items",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "1, , NOOAPI 1200 mg 1200mg, viên, 28, 2976.19, 83333, 5%, 4167, 5%, 4167, 87500, ",
+            "2, , Apitor 20 20mg, viên, 28, 6547.62, 183333, 5%, 9167, 5%, 9167, 192500, "
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__vat_summary_table",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Thuế suất 5%, 5%, 266666, 13334, 280000"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__total_invoice_amount",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "280000"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__amount_in_words",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Hai trăm tám mươi nghìn đồng chẵn"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__has_seller_signature",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__has_buyer_signature",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__has_converter_signature",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__has_seller_stamp",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "true"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "task": 4,
+    "project": 5,
+    "model_version": "chandra_gemma4_v1",
+    "result": [
+      {
+        "from_name": "schema_type",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "vat_invoice"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__document_title",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "HÓA ĐƠN GIÁ TRỊ GIA TĂNG"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__invoice_serial",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "1C25MTM"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__invoice_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "00118399"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__tax_authority_code",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "M1-25-IWELC-00000118399"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__seller_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "CÔNG TY TNHH BỆNH VIỆN ĐKTN AN SINH - PHÚC TRƯỜNG MINH"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__seller_tax_code",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "0106793535"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__seller_address",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Số 8 đường Châu Văn Liêm, Phường Phú Đô, Quận Nam Từ Liêm, Thành phố Hà Nội, Việt Nam"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__buyer_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Khuất Thị Hằng"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__buyer_address",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "283 Khương Trung, Phường Khương Trung, Quận Thanh Xuân, Thành phố Hà Nội"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__payment_method",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Tiền mặt/Chuyển khoản"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__vat_invoice_line_items",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "1, , Augmentin 1g hộp/14 viên, Viên, 21, 21238.1, 446000, 5%, 22300, 5%, 22300, 468300, 468300",
+            "2, , Habroxol 30mg (Hộp 20 ống x 10ml), Ống, 21, 6380.95, 134000, 5%, 6700, 5%, 6700, 140700, 140700",
+            "3, , Strepsils Maxpro hộp 2 vi x 8 viên, Viên, 20, 2285.71, 45714.29, 5%, 2285.71, 5%, 2285.71, 48000, 48000"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__vat_summary_table",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Tổng tiền không chịu thuế GTGT:, KCT, , , ",
+            "Tổng tiền chịu thuế suất:, 0%, , , ",
+            "Tổng tiền chịu thuế suất:, 5%, 625714.29, 31285.71, 657000",
+            "Tổng tiền chịu thuế suất:, 8%, , , ",
+            "Tổng tiền chịu thuế suất:, 10%, , , ",
+            "Tổng cộng tiền thanh toán:, , 625714.29, 31285.71, 657000"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__total_invoice_amount",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "657000"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__amount_in_words",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Sáu trăm năm mươi bảy nghìn đồng chẵn././"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__invoice_lookup_code",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "KIISUU332KF"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__invoice_lookup_link",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "http://tracuu.ehoadon.vn"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__has_seller_signature",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "true"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__has_buyer_signature",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__has_converter_signature",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__has_seller_stamp",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "task": 5,
+    "project": 5,
+    "model_version": "chandra_gemma4_v1",
+    "result": [
+      {
+        "from_name": "schema_type",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "vat_invoice"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__document_title",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "HÓA ĐƠN GIÁ TRỊ GIA TĂNG"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__invoice_serial",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "1C25TNL"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__invoice_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "00001088"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__tax_authority_code",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "00DE13AEBFBEC4C1B827FF1C68224ED0A"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__seller_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "CÔNG TY TNHH THƯƠNG MẠI DỊCH VỤ NHA KHOA SÀI GÒN - LÊ NGUYỄN LÂM"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__seller_tax_code",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "1801425824"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__seller_phone_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "02923 899 104"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__seller_address",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "251 Đường Nguyễn Văn Cừ, Phường An Hòa, Quận Ninh Kiều, Thành phố Cần Thơ"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__buyer_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "HUỖNH THỊ THÚY UYÊN"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__buyer_address",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "539/20, KV Bình Trung, Long Hòa, Bình Thủy, Cần Thơ"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__payment_method",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Tiền mặt"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__vat_invoice_line_items",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "1, , CẠO VÔI RĂNG, HÀM, 2, 150000, 300000, , , , , 300000, ",
+            "2, , TRÁM RĂNG, CÁI, 1, 400000, 400000, , , , , 400000, "
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__total_invoice_amount",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "700000"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__has_seller_signature",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__has_buyer_signature",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__has_converter_signature",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__has_seller_stamp",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "task": 6,
+    "project": 5,
+    "model_version": "chandra_gemma4_v1",
+    "result": [
+      {
+        "from_name": "schema_type",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "vat_invoice"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__document_title",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "HÓA ĐƠN GIÁ TRỊ GIA TĂNG"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__invoice_serial",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "IK25TMT"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__invoice_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "00015576"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__seller_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "CÔNG TY CỔ PHẦN MINH MINH TÂM"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__seller_tax_code",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "2100425352"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__seller_phone_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "02943 850665"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__seller_address",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Số 36 Nguyễn Đăng, Phường 9, TP. Trà Vinh, Tỉnh Trà Vinh"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__buyer_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Hồ Minh Tinh"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__buyer_address",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Xã Mỹ Chánh, Huyện Châu Thành, Tỉnh Trà Vinh"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__payment_method",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "TM/CK"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__vat_invoice_line_items",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "1, , Thu 20% đồng chi trả BHYT nội trú, , , , , , , , , 794785, ",
+            "2, , Thu phí dịch vụ và phụ thu chênh lệch, , , , , , , , , 8913364, "
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__total_invoice_amount",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "9708149"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__has_seller_signature",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__has_buyer_signature",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__has_converter_signature",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__has_seller_stamp",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "task": 7,
+    "project": 5,
+    "model_version": "chandra_gemma4_v1",
+    "result": [
+      {
+        "from_name": "schema_type",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "vat_invoice"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__document_title",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "HÓA ĐƠN GIÁ TRỊ GIA TĂNG"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__invoice_serial",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "1C25TVP"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__invoice_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "72051"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__tax_authority_code",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "0067688DE8F317402B96CCAB1D26A714A3"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__healthcare_facility_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Y KHOA VẠN PHƯỚC CỬU LONG"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__seller_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "CÔNG TY TNHH Y KHOA VẠN PHƯỚC CỬU LONG"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__seller_tax_code",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "1801168302"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__seller_phone_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "0292.3891789"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__seller_email",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "ketoanvpci@gmail.com"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__seller_address",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "19 Nguyễn Văn Linh, Phường Hưng Lợi, Quận Ninh Kiều, Thành phố Cần Thơ, Việt Nam"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__buyer_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "HÀ MINH TRUNG"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__buyer_address",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Xuân Khánh, Ninh Kiều, Cần Thơ"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__payment_method",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "TM/CK"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__vat_invoice_line_items",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "1, , Thuốc tây theo toa BS, Toa, 1, 190933, 190933, 5%, 9547, 5%, 9547, , 200480"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__vat_summary_table",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Cộng tiền hàng, 5%, 190933, 9547, 200480"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__total_invoice_amount",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "200480"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__amount_in_words",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Hai trăm nghìn bốn trăm tám mươi đồng"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__invoice_lookup_code",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "20A81FGHS7G4"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__invoice_lookup_link",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "http://tracuu.vin-hoadon.com"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__has_seller_signature",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "true"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__has_buyer_signature",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__has_converter_signature",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "true"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__has_seller_stamp",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "task": 9,
+    "project": 5,
+    "model_version": "chandra_gemma4_v1",
+    "result": [
+      {
+        "from_name": "schema_type",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "vat_invoice"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__document_title",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "HÓA ĐƠN GIÁ TRỊ GIA TẶNG"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__invoice_serial",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "1K25TTM"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__invoice_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "00165321"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__healthcare_facility_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "CÔNG TY TNHH BỆNH VIỆN ĐKTN AN SINH - PHÚC TRƯỜNG MINH"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__seller_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "CÔNG TY TNHH BỆNH VIỆN ĐKTN AN SINH - PHÚC TRƯỜNG MINH"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__seller_tax_code",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "0106793535"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__seller_address",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Số 8 đường Châu Văn Liêm, Phường Tù Liêm, Thành phố Hà Nội, Việt Nam"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__buyer_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Bùi Khánh Ly"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__national_id",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "036191022191"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__buyer_address",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "16 Phạm Hùng, Mỹ Đình 2, Nam Từ Liêm, Hà Nội"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__payment_method",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Tiền mặt/Chuyển khoản"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__vat_invoice_line_items",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "1, , Điều trị viêm quanh răng [Viêm nha chu/viêm lợi], Lần, 1, 1000000, 1000000, KCT, 0, , 0, 1000000, 1000000",
+            "2, , Lấy cao răng, Lần, 1, 400000, 400000, KCT, 0, , 0, 400000, 400000"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__total_invoice_amount",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "1400000"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__has_seller_signature",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__has_buyer_signature",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__has_converter_signature",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__has_seller_stamp",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "task": 10,
+    "project": 5,
+    "model_version": "chandra_gemma4_v1",
+    "result": [
+      {
+        "from_name": "schema_type",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "vat_invoice"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__document_title",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "HÓA ĐƠN GIÁ TRỊ GIA TĂNG"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__invoice_serial",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "1K25TVC"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__invoice_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "00164668"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__seller_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "BỆNH VIỆN ĐA KHOA QUỐC TẾ S.I.S CÀN THO - CHI NHÁNH CÔNG TY CỔ PHẦN ĐẦU TƯ Y TẾ VIỆT CƯỜNG"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__seller_tax_code",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "0312592908-002"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__seller_phone_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "02923.789911"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__seller_address",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Số 397 Nguyễn Văn Cừ, Phường An Bình, Quận Ninh Kiều, Thành Phố Cần Thơ, Việt Nam"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__buyer_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "BÀNH THỊ MỸ XUYÊN"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__buyer_address",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Khóm 6 Phường 8 Thành phố Trà Vinh Tỉnh Trà Vinh"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__payment_method",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Tiền mặt/Chuyển khoản"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__vat_invoice_line_items",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "1, , Khám bệnh, Lần, 1, 150000, 150000, , , , , 150000, ",
+            "2, , \"Thuốc, dịch truyền\", Lần, 1, 267491, 267491, , , , , 267491, "
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__total_invoice_amount",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "417491"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__amount_in_words",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Bốn trăm mười bảy nghìn bốn trăm chín mươi một đồng chẵn"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__invoice_lookup_code",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "3JHJS984ZWEW"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__invoice_lookup_link",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "https://www.meinvoice.vn/tra-cuu"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__has_seller_signature",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "true"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__has_buyer_signature",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "true"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__has_converter_signature",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      },
+      {
+        "from_name": "vat_invoice__has_seller_stamp",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "true"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "task": 11,
+    "project": 5,
+    "model_version": "chandra_gemma4_v1",
+    "result": [
+      {
+        "from_name": "schema_type",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "insurance_card"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__policyholder_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "CT NHỊỆT ĐIỆN CẦN THƠ - CN TCT PHÁT ĐIỆN 2 - CTCP"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__insured_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "PHẠM VĂN NHỊN"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__date_of_birth",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "02/03/1967"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__national_id",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "093067000116"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__policy_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "5182400004/G02"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__insurance_period",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "05/12/2024 - 05/12/2025"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "task": 12,
+    "project": 5,
+    "model_version": "chandra_gemma4_v1",
+    "result": [
+      {
+        "from_name": "schema_type",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "insurance_card"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__policyholder_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "CT NHỊỆT ĐIỆN DUYÊN HẢI - CN TCT PHÁT ĐIỆN 1"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__insured_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "MAI THANH DỴ"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__date_of_birth",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "20/11/2001"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__national_id",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "084201004340"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__policy_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "25CN.SK.01.01V03200001"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__insurance_period",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "20/01/2025 - 19/01/2026"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "task": 13,
+    "project": 5,
+    "model_version": "chandra_gemma4_v1",
+    "result": [
+      {
+        "from_name": "schema_type",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "insurance_card"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__policyholder_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "NGÂN HÀNG TMCP KIÊN LONG"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__insured_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Lê Trần Thảo Vy"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__national_id",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "087191013081"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__policy_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "25CN.SK.01.01V05900034"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__insurance_period",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "16/05/2025"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "task": 14,
+    "project": 5,
+    "model_version": "chandra_gemma4_v1",
+    "result": [
+      {
+        "from_name": "schema_type",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "insurance_card"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__policyholder_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "CT NHIỆT ĐIỆN CẦN THƠ - CN TCT PHÁT ĐIỆN 2 - CTCP"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__insured_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "LA QUỐC HUY"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__date_of_birth",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "11/07/1984"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__national_id",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "092084002690"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__policy_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "5182400004/G02"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__insurance_period",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "05/12/2024 - 05/12/2025"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "task": 16,
+    "project": 5,
+    "model_version": "chandra_gemma4_v1",
+    "result": [
+      {
+        "from_name": "schema_type",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "insurance_card"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__policyholder_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "CT NHỊỆT ĐIỆN CẦN THƠ - CN TCT PHÁT ĐIỆN 2 - CTCP"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__insured_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "PHẠM VĂN NHỊN"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__date_of_birth",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "02/03/1967"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__national_id",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "093067000116"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__policy_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "5182400004/G02"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__insurance_period",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "05/12/2024 - 05/12/2025"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "task": 17,
+    "project": 5,
+    "model_version": "chandra_gemma4_v1",
+    "result": [
+      {
+        "from_name": "schema_type",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "insurance_card"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__policyholder_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "NGÂN HÀNG TMCP KIÊN LONG"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__insured_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "NGUYỄN NGỌC NGUYỄN"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__date_of_birth",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "03/02/1995"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__national_id",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "095195009896"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__policy_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "25CN.SK.01.01V05900034"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__insurance_period",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "16/05/2025-15/05/2026"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "task": 18,
+    "project": 5,
+    "model_version": "chandra_gemma4_v1",
+    "result": [
+      {
+        "from_name": "schema_type",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "insurance_card"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__policyholder_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "NGUYỄN ANH DƯƠNG"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__insured_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "NGUYỄN ANH DƯƠNG"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__date_of_birth",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "01/08/2001"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__national_id",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "001301007310"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__policy_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "23000100410100012"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__insurance_period",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "01/03/2025 - 31/01/2016"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "task": 19,
+    "project": 5,
+    "model_version": "chandra_gemma4_v1",
+    "result": [
+      {
+        "from_name": "schema_type",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "insurance_card"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__policyholder_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "NGÂN HÀNG TMCP KIÊN LONG"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__insured_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Lê Trần Thảo Vy"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__national_id",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "087191013081"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__policy_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "25CN.SK.01.01V05900034"
+          ]
+        }
+      },
+      {
+        "from_name": "insurance_card__insurance_period",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "16/05/2025"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "task": 21,
+    "project": 5,
+    "model_version": "chandra_gemma4_v1",
+    "result": [
+      {
+        "from_name": "schema_type",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "outpatient_medical_record"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__document_title",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "PHIẾU KHÁM BỆNH"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__healthcare_facility_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Tâm Anh Hospital"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__medical_code",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "KB326911/25"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__clinic_area",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Phòng Khám Hồ Hấp 2"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__examination_sequence_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "2510154283"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__encounter_date",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "11/06/2025"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__patient_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "TRẦN LÊ VỊ"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__patient_gender",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Nữ"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__date_of_birth",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "02/11/1990"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__birth_year",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "1990"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__patient_age",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "35 Tuổi"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__patient_address",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Số nhà: 72/63/10 Huỳnh Văn Nghệ Thôn, phố: Xã, phường: Phường 15, Quận Tân Bình, Thành phố Hồ Chí Minh"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__occupation",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Nhân Viên Văn Phòng"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__ethnicity",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Kinh"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__patient_object_type",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Thu phí"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__health_insurance_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "DN 4 91 79 120 31308 79033"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__pulse_rate",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "81 lần/phút"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__respiratory_rate",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "19 lần/phút"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__height",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "156.5cm"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__bmi_index",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "19.35"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__body_temperature",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "36.5 C°"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__blood_pressure",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "103/56 mmHg"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__weight",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "47.4 Kg"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__admission_reason",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Hô đẫm"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__history_of_present_illness",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Bệnh nhân khai hơn nửa tháng nay ho đẫm, lúc đẫm trắng lúc đẫm vàng, dùng thuốc uống không giảm. 2 ngày nay đau lồng sau lưng khi ho/ nuốt nước miếng, khó thở khi tôi ngủ nằm ngửa, không sốt, không ớn lạnh, không khó thở."
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__general_examination",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Bệnh tính, tiếp xúc tốt; Da niêm mạc: hồng; Tuyên giáp: không to"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__organ_examination",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Tim: đều; Phổi: trong; Bụng: mềm"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__paraclinical_summary",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Khám Hô hấp (Chiều): Chụp X-quang ngực thẳng (1 phim): Chưa ghi nhận bất thường trên phim X-quang ngực; Siêu âm màng phổi: Không tràn dịch màng phổi hai bên;"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__clinical_diagnosis",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Viêm phổi quan cấp, không phân loại (J20.9); Bệnh dây thần kinh liên sườn (G59); Viêm mũi dị ứng khác (J30.3)"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__icd_code",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "J20.9, G59, J30.3"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__treatment_plan",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Khám và tư vấn kết quả, tư vấn tình trạng bệnh, bệnh nhân không thắc mắc gì thêm. Theo dõi"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__has_physician_signature",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__has_healthcare_facility_stamp",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__family_medical_history",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Bình thường"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "task": 22,
+    "project": 5,
+    "model_version": "chandra_gemma4_v1",
+    "result": [
+      {
+        "from_name": "schema_type",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "outpatient_medical_record"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__document_title",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "PHIẾU KHÁM BỆNH"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__healthcare_facility_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Bệnh viện Đại học Y Dược TP.HCM"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__clinic_area",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Lầu 1 Khu A"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__examination_sequence_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "178/92"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__expected_examination_time",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "15:25"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__encounter_date",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "25/02/2025"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__examination_session",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Chiều"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__examination_fee",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "150000"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__medical_record_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "N24-0066838"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__patient_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "PHAN VĂN CHUNG"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__patient_gender",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Nam"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__birth_year",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "1988"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__patient_address",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "TP.HCM"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__patient_object_type",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Thu phí"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__examination_request",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "NỘI CƠ XƯƠNG KHỚP"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__room_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Phòng 41"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__has_physician_signature",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__has_healthcare_facility_stamp",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "true"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "task": 24,
+    "project": 5,
+    "model_version": "chandra_gemma4_v1",
+    "result": [
+      {
+        "from_name": "schema_type",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "outpatient_medical_record"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__document_title",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "PHIẾU KHÁM BỆNH"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__healthcare_facility_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Tâm Anh Hospital"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__medical_code",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "42/BV-01"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__clinic_area",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Phòng Khám Mắt"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__examination_sequence_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "KB471152/25"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__encounter_date",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "27/05/2025"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__medical_record_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "23658662"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__patient_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "NGUYỄN CAO CƯỜNG"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__patient_gender",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Nam"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__date_of_birth",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "20 09 1985"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__birth_year",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "1985"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__patient_age",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "40"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__patient_address",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Số nhà: 6.13, CC CH2, Lô C, KDC Cityland Đường số 10 Thôn, phố: Xã, phường: Phường 10 Huyện (Q, Tx): Quận Gò Vấp"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__occupation",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Nhân Viên Văn Phòng"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__ethnicity",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Kinh"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__patient_object_type",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "BHYT"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__has_physician_signature",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__has_healthcare_facility_stamp",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "task": 25,
+    "project": 5,
+    "model_version": "chandra_gemma4_v1",
+    "result": [
+      {
+        "from_name": "schema_type",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "outpatient_medical_record"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__document_title",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "PHIẾU KHÁM BỆNH"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__healthcare_facility_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "NHA KHOA MISO"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__encounter_date",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "12/01/2025"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__examination_fee",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "9000000"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__examining_doctor_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "YOUN SOUNG HO"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__medical_record_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "9824"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__patient_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "임기원 LIM KI WON"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__patient_gender",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Nam"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__date_of_birth",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "01/12/1987"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__birth_year",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "1987"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__patient_address",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "R1 4010, GOLDMARK CITY, HA NOI"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__phone_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "0966379832"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__clinical_diagnosis",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "bọc chụp sau khi điều trị tủy"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__treatment_given",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Core filling (1), HT Smile Crown (26 bọc sau điều trị tủy)"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__has_physician_signature",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "true"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__has_healthcare_facility_stamp",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "task": 26,
+    "project": 5,
+    "model_version": "chandra_gemma4_v1",
+    "result": [
+      {
+        "from_name": "schema_type",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "outpatient_medical_record"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__document_title",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "PHIẾU KHÁM BỆNH"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__healthcare_facility_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "BỆNH VIỆN ĐA KHOA HỒNG NGOC"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__encounter_date",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "10/10/25 16:03/2026"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__examining_doctor_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Bc. Khloe Thị Phương"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__patient_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "LÊ TÀI TÂM"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__patient_gender",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Ng"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__date_of_birth",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "27/06/1992"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__patient_address",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "109 Nguyễn Tuân, Phường Thanh Xuân, Thành phố Hà Nội"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__phone_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "086***1992"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__health_insurance_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "250259992"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__examination_request",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Khám Phụ khoa"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__room_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "PTM 3-052 PK Phụ khoa & Sản - Tờ 1"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__pulse_rate",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "80"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__respiratory_rate",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "20"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__height",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "156"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__bmi_index",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "22.60"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__body_temperature",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "36.6"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__blood_pressure",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "100/60"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__weight",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "55"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__admission_reason",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Ra nhiều khí hư"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__medical_history",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Para:1021 để mở; khỏe mạnh"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__history_of_present_illness",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "KOC: 25.2.2026 Kinh nguyệt đều Gần đây bệnh nhân thấy ra nhiều khí hư, không đau bụng, không ra máu âm đạo"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__general_examination",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Trung bình"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__organ_examination",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Âm hộ: bình thường; Âm đạo: có khí hư; CTC: không tổn thương; Tử cung kích thước bình thường; Hai phần phụ không sờ thấy khối; Càng đồ không đầy không đau"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__preliminary_diagnosis",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Viêm âm đạo"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__clinical_diagnosis",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Viêm âm đạo"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__icd_code",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "N76"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__treatment_given",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Cấp toa cho về: - Toa thuốc : 2603163449"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__treatment_plan",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Dùng thuốc theo đơn. Hẹn khám phụ khoa định kì, bất thường khám lại ngay"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__has_physician_signature",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "true"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__has_healthcare_facility_stamp",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "true"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__family_medical_history",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Chưa phát hiện"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__drug_allergy",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "không"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "task": 27,
+    "project": 5,
+    "model_version": "chandra_gemma4_v1",
+    "result": [
+      {
+        "from_name": "schema_type",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "outpatient_medical_record"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__document_title",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "PHIẾU KHÁM BỆNH"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__healthcare_facility_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "BỆNH VIỆN ĐẠI HỌC PHENIKAA"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__examination_sequence_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "250011940"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__encounter_date",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "09/07/2025"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__examining_doctor_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "ThS.BS. Vũ Văn Minh"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__medical_record_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "250011940"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__patient_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "HOÀNG VĂN LIÊM"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__patient_gender",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Nam"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__date_of_birth",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "11/11/1995"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__birth_year",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "1995"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__patient_address",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "xóm 7B, Lai Thành, Kim Sơn, Ninh Bình"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__phone_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "0886667222"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__occupation",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Khác"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__ethnicity",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Kinh"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__patient_object_type",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "1.BHYT"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__pulse_rate",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "69 lần/ph"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__respiratory_rate",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "18 lần/ph"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__height",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "178 cm"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__bmi_index",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "18.94 kg/m2"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__body_temperature",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "36 °C"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__blood_pressure",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "117/74 mmHg"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__weight",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "60 kg"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__admission_reason",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Đau cổ vai gáy ; Đau cột sống cổ, vai phải"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__medical_history",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Bản thân: Chưa phát hiện bất thường; Gia đình: Chưa phát hiện bất thường"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__history_of_present_illness",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Nhiều ngày nay, người bệnh đau vai phải, hạn chế vận động. Đợt này bệnh nhân đau thêm cột sống cổ, hạn chế vận động => đi khám"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__general_examination",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Tinh, tiếp xúc tốt; Không sốt; Không phù; Da niêm mạc hồng; Tuyến giáp không to; Hạch ngoại vi không sờ thấy"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__organ_examination",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Cột sống cổ: Dau cột sống cổ, co cứng nhẹ cơ cạnh sống, đau lan vai phải; Khớp ngoại vi: Dau, tầm vận động hạn chế khớp: Vai phải; Các khớp khác chưa phát hiện bất thường; Tim nhịp đều, T1 T2 rõ, không thấy tiếng bất thường; Mạch ngoại vi bất rõ, đều 2 bên; Phổi RRPN rõ, không rale; Bụng mềm, không phản ứng thành bụng; Vỗ hông lưng âm tính; Đại tiểu tiện bình thường; Không liệt khu trú"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__preliminary_diagnosis",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Đau cột sống cổ vai phải"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__clinical_diagnosis",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Bệnh chính: M54.2 - Đau vùng cổ gáy; Bệnh kèm theo: D69.6 - Giảm tiểu cầu không đặc hiệu; M75.1 - Hội chứng bao gân xoay"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__icd_code",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "M54.2, D69.6, M75.1"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__treatment_given",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "7. Cấp đơn cho về"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__treatment_plan",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Khám thêm chuyên khoa huyết học. Tư vấn tập phục hồi chức năng. Tập bài tập như hướng dẫn. Khám lại ngay khi có bất thường"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__has_physician_signature",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "true"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__has_healthcare_facility_stamp",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__family_medical_history",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Chưa phát hiện bất thường"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__treatment_request",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Khám Nội cơ - xương - khớp; Chụp X-quang cột sống cổ thẳng nghiêng [số hóa 2 phim]; Siêu âm khớp (gối, háng, khuỷu, cổ tay...); Chụp X-quang khớp vai thẳng [số hóa 1 phim]; Tổng phân tích tế bào máu ngoại vi (bằng máy đếm laser); Định lượng Glucose [Máu]; Định lượng Acid Uric [Máu]; Tổng phân tích nước tiểu (Bằng máy tự động); Định lượng Creatinin (máu); Định lượng CRP hs (C-Reactive Protein high sesitivity) [Máu]; Định lượng RF (Rheumatoid Factor) [Máu];"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__cardiovascular_status",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Tim nhịp đều, T1 T2 rõ, không thấy tiếng bất thường; Mạch ngoại vi bất rõ, đều 2 bên"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "task": 28,
+    "project": 5,
+    "model_version": "chandra_gemma4_v1",
+    "result": [
+      {
+        "from_name": "schema_type",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "outpatient_medical_record"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__document_title",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "PHIẾU KHÁM BỆNH"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__healthcare_facility_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "BỆNH VIỆN BẠCH MAI"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__clinic_area",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Khoa Nội tiết - Đài thảo đường"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__examination_sequence_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "52"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__encounter_date",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "11/06/2025"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__examination_fee",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "350000"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__medical_record_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "0002102591"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__patient_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "BỊ TUYÊN ANH"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__patient_gender",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Nam"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__date_of_birth",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "1981"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__birth_year",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "1981"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__patient_address",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "XÓM LẺ, Xã Tân Triều, Huyện Thanh Trì, Hà Nội"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__phone_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "0942288808"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__examination_request",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Khám Nội tiết [Tiến sĩ/BSCKII]"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__room_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "PK Nội Tiết (P.421 Nhà K1) - Phòng 421 - Tầng 4 - Tòa Nhà K1"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__pulse_rate",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "85"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__height",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "171"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__blood_pressure",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "122/88"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__weight",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "65"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__has_physician_signature",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      },
+      {
+        "from_name": "outpatient_medical_record__has_healthcare_facility_stamp",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "task": 30,
+    "project": 5,
+    "model_version": "chandra_gemma4_v1",
+    "result": [
+      {
+        "from_name": "schema_type",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "claim_form"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__document_title",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "GIẤY YÊU CẦU BỒI THƯỜNG BẢO HIỂM SỨC KHỎE (PROPOSAL CLAIM FORM)"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__insured_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "TRƯƠNG HOÀNG KHÁI"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__date_of_birth",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "01/02/1998"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__national_id",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "084098004992"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__employee_id",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "NDDH1440"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__email_address",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "anh142926@gmail.com"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__phone_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "0382864834"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__clinical_diagnosis",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "U ác của tuyến giáp; Khóm theo dõi sau điều trị"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__healthcare_facility_address",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Bệnh viện Ung bướu - Cơ sở 2 TP Hồ Chí Minh"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__admission_date",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "06/31/2026"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__discharge_date",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "06/31/2026"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__total_claimed_amount",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "1964250"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__beneficiary_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "TRƯƠNG HOÀNG KHÁI"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__bank_account_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "7340313938"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__bank_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "BIDV"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__bank_branch_address",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Khóm 1, phường Duyên Hải, tỉnh Vĩnh Long"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__has_hr_signature",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__has_insured_signature",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "true"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__has_company_stamp",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "task": 31,
+    "project": 5,
+    "model_version": "chandra_gemma4_v1",
+    "result": [
+      {
+        "from_name": "schema_type",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "claim_form"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__document_title",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "GIẤY YÊU CẦU BỒI THƯỜNG BẢO HIỂM SỨC KHỎE"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__insured_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Trịnh Hoàng Duy"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__date_of_birth",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "04/08/2000"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__national_id",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "0892 00008180"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__employee_id",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "13423"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__email_address",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "duythoang@bank.com"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__phone_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "09399779071"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__has_hr_signature",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__has_insured_signature",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "true"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__has_company_stamp",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "task": 32,
+    "project": 5,
+    "model_version": "chandra_gemma4_v1",
+    "result": [
+      {
+        "from_name": "schema_type",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "claim_form"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__document_title",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "GIẤY YÊU CẦU BỒI THƯỜNG BẢO HIỂM SỨC KHỎE"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__insured_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Nguyễn Thị Xanh"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__date_of_birth",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "28/09/1993"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__national_id",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "036493011275"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__employee_id",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "16560"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__email_address",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "xanhnt@kientlongbank.com"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__phone_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "0385266867"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__clinical_diagnosis",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Điêu trị suy, nhồi máu khốn"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__healthcare_facility_address",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Nha Khoa Hoa Sư 21 Hùng Vương, KP3, phường Bà Rịa, tp HCM"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__admission_date",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "22/03/2026"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__discharge_date",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "25/03/2026"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__total_claimed_amount",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "4800000"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__beneficiary_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Nguyễn Thị Xanh"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__bank_account_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "0385266867"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__bank_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Kientlong Bank - CN Bà Rịa Vũng Tàu"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__bank_branch_address",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "26A-28-30 CMT8, Long Hương, HCM."
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__has_hr_signature",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__has_insured_signature",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "true"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__has_company_stamp",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "task": 33,
+    "project": 5,
+    "model_version": "chandra_gemma4_v1",
+    "result": [
+      {
+        "from_name": "schema_type",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "claim_form"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__document_title",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "GIẤY YÊU CẦU BỒI THƯỜNG BẢO HIỂM SỨC KHỎE (PROPOSAL CLAIM FORM)"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__insured_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Nguyễn Thanh Phong"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__date_of_birth",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "24/03/1982"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__national_id",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "092082014656"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__email_address",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "tuan01@gmail.com"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__phone_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "0909 303 474"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__clinical_diagnosis",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Dau hông, viêm phổi, trào ngược dạ dày"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__healthcare_facility_address",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "102 CMT8, P.Cai Lậy Q. Ninh Kiều, TP. Cần Thơ"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__admission_date",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "08/01/2025"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__discharge_date",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "08/01/2025"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__total_claimed_amount",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "600000"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__beneficiary_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Nguyễn Thanh Phong"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__bank_account_number",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "6030696349300001"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__bank_name",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Nam A'"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__bank_branch_address",
+        "to_name": "document",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "Cần Thơ"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__has_hr_signature",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__has_insured_signature",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "true"
+          ]
+        }
+      },
+      {
+        "from_name": "claim_form__has_company_stamp",
+        "to_name": "document",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "false"
+          ]
+        }
+      }
+    ]
+  }
+]
