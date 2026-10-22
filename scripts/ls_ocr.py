@@ -1,6 +1,6 @@
 """Benchmark bước 1: OCR file của các task trên Label Studio, lưu task_id -> OCR run_id ra file txt.
 
-    uv run python scripts/ls_ocr.py --project-id 4 --out runs/project4_chandra.txt
+    uv run python scripts/ls_ocr.py --project-id 15 --out runs/project15.txt
     uv run python scripts/ls_ocr.py --project-id 4 --task-id 12 --engine dots_mocr --out runs/p4_dots.txt
 
 Chạy lại cùng --out: task đã completed thì bỏ qua, task partial thì resume các trang lỗi.

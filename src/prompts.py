@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 from typing import TYPE_CHECKING, Optional
 
 if TYPE_CHECKING:
@@ -178,11 +179,32 @@ UNKNOWN_DOCUMENT_DESCRIPTION = (
 )
 
 
+_IMAGE_RE = re.compile(r"!\[([^\]]*)\]\([^)]*\)")
+_CODE_ALT_RE = re.compile(r"barcode|bar code|\bqr\b|mã vạch", re.IGNORECASE)
+# Ảnh gộp cả dấu/chữ ký với QR (vd "Red stamp: ... ĐÃ THU TIỀN. QR code") thì giữ
+_STAMP_ALT_RE = re.compile(r"stamp|seal|signature|con dấu|chữ ký", re.IGNORECASE)
+
+
+def _drop_code_image(match: re.Match) -> str:
+    alt = match.group(1)
+    if _CODE_ALT_RE.search(alt) and not _STAMP_ALT_RE.search(alt):
+        return ""
+    return match.group(0)
+
+
+def clean_markdown(markdown: str) -> str:
+    """Bỏ ảnh barcode/QR ``![alt](src)``: alt là mô tả do model OCR tự sinh, dễ làm LLM
+    nhầm (vd "Barcode for prescription code" cạnh Mã Y Lệnh). Ảnh khác (dấu, chữ ký...)
+    giữ lại vì là tín hiệu cho các field has_*_stamp / has_*_signature."""
+    markdown = _IMAGE_RE.sub(_drop_code_image, markdown)
+    return re.sub(r"\n{3,}", "\n\n", markdown).strip()
+
+
 def build_document_input(pages: list[tuple[int, str]]) -> str:
     """Ghép markdown từng trang thành 1 khối <document> có đánh số trang."""
     return TEMPLATE_DOCUMENT_INPUT.format(
         pages="\n\n".join(
-            TEMPLATE_PAGE.format(page=page, markdown=markdown.strip())
+            TEMPLATE_PAGE.format(page=page, markdown=clean_markdown(markdown))
             for page, markdown in pages
         )
     )

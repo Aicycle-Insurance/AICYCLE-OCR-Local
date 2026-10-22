@@ -94,6 +94,24 @@ class BaseOCR(ABC):
             "max_tokens": self.config.max_tokens,
         }
 
+    async def generate(self, image: Image.Image) -> tuple[str, str | None, dict[str, int]]:
+        """Gọi model cho 1 ảnh, trả về (output thô, finish_reason, usage)."""
+        response = await self.client.chat.completions.create(
+            model=self.config.model,
+            messages=self.build_messages(image),
+            **self._model_parameters,
+        )
+        usage = response.usage
+        return (
+            response.choices[0].message.content or "",
+            response.choices[0].finish_reason,
+            {
+                "input": usage.prompt_tokens if usage else 0,
+                "output": usage.completion_tokens if usage else 0,
+                "total": usage.total_tokens if usage else 0,
+            },
+        )
+
     async def ocr_page(self, page: int, image: Image.Image) -> tuple[str, OCRPage]:
         """OCR 1 trang, trả về (output thô, kết quả markdown)."""
         with trace_observation(
@@ -106,28 +124,19 @@ class BaseOCR(ABC):
         ) as generation:
             logger.info(f"[{self.name}] page {page}: sending request...")
             started = time.perf_counter()
-            response = await self.client.chat.completions.create(
-                model=self.config.model,
-                messages=self.build_messages(image),
-                **self._model_parameters,
-            )
+            raw, finish_reason, usage = await self.generate(image)
             seconds = time.perf_counter() - started
-            raw = response.choices[0].message.content or ""
-            finish_reason = response.choices[0].finish_reason
-            usage = response.usage
             update_observation(
                 generation,
                 output={"characters": len(raw), "finish_reason": finish_reason},
-                usage_details={
-                    "input": usage.prompt_tokens if usage else 0,
-                    "output": usage.completion_tokens if usage else 0,
-                    "total": usage.total_tokens if usage else 0,
-                },
-                level="WARNING" if finish_reason == "length" else None,
+                usage_details=usage,
+                level="WARNING" if finish_reason in ("length", "repeat") else None,
             )
 
         if finish_reason == "length":
             logger.warning(f"[{self.name}] page {page}: output truncated at max_tokens")
+        elif finish_reason == "repeat":
+            logger.warning(f"[{self.name}] page {page}: output still repeating, repeated tail cut")
         logger.info(f"[{self.name}] page {page}: {seconds:.2f}s, {len(raw)} chars")
         return raw, OCRPage(
             page=page,
