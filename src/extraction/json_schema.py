@@ -183,6 +183,7 @@ def build_phase1_response_schema(
 
     # Several same-code documents on one page (e.g. 2 CCCD of 2 people).
     # Without bbox, each instance is identified by text taken from the OCR output.
+    # ``sides`` replaces Gemini's region sides, used to merge a front-only page with an adjacent back-only page.
     properties["instances"] = {
         "type": "array",
         "items": {
@@ -191,8 +192,13 @@ def build_phase1_response_schema(
                 "identifier": {"type": "string"},
                 "front_name": {"type": ["string", "null"]},
                 "mrz_name": {"type": ["string", "null"]},
+                "sides": {
+                    "type": "array",
+                    "items": {"type": "string", "enum": ["front", "back", "single"]},
+                    "minItems": 1,
+                },
             },
-            "required": ["identifier", "front_name", "mrz_name"],
+            "required": ["identifier", "front_name", "mrz_name", "sides"],
             "additionalProperties": False,
         },
         "minItems": 1,

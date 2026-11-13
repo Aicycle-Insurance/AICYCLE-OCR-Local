@@ -218,7 +218,8 @@ class ExtractedDocument(BaseModel):
         suggested_document_name: AI-suggested document name (only for unknown/undefined documents).
         start_page: 1-indexed first page of this document.
         end_page: 1-indexed last page of this document.
-        extracted_data: One extracted object per document instance, values keyed by field_key.
+        extracted_data: One extracted object per document instance, values keyed by field_key;
+            each scalar is {value, coordinates} with coordinates always null (no bbox).
     """
     document_code: str
     document_name: Optional[str] = None

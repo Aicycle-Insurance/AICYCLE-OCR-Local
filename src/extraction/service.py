@@ -9,6 +9,7 @@ import asyncio
 import json
 import re
 import time
+import unicodedata
 from dataclasses import dataclass
 from functools import partial
 from pathlib import Path
@@ -23,7 +24,12 @@ from src.extraction.json_schema import (
     build_phase1_response_schema,
     build_phase2_response_schema,
 )
-from src.extraction.schemas import ExtractionSchema, ExtractRequest, ExtractResponse
+from src.extraction.schemas import (
+    ExtractionSchema,
+    ExtractRequest,
+    ExtractResponse,
+    FieldSchema,
+)
 from src.prompts import build_document_input, build_phase1_prompt, build_phase2_prompt
 from src.storage import new_run_dir, write_json
 from src.tracing import trace_observation, trace_pipeline, update_observation
@@ -473,6 +479,130 @@ class ExtractionService:
                 merged.append(doc)
         return merged
 
+    @staticmethod
+    def _normalize_card_name(name: Any) -> str:
+        """Normalize a printed or MRZ holder name for front/back matching."""
+        if not isinstance(name, str):
+            return ""
+        text = name.replace("Đ", "D").replace("đ", "d").replace("<", " ")
+        text = unicodedata.normalize("NFD", text)
+        text = "".join(ch for ch in text if unicodedata.category(ch) != "Mn")
+        return " ".join(text.upper().split())
+
+    @staticmethod
+    def _single_card_side(doc: dict[str, Any]) -> Optional[str]:
+        """Return ``front``/``back`` for a one-page entry holding one one-sided card."""
+        instances = doc.get("instances")
+        start_page = doc.get("start_page", 1)
+        if (
+            not isinstance(instances, list)
+            or len(instances) != 1
+            or not isinstance(instances[0], dict)
+            or start_page != doc.get("end_page", start_page)
+        ):
+            return None
+        sides = set(instances[0].get("sides") or [])
+        if len(sides) == 1 and sides <= {"front", "back"}:
+            return sides.pop()
+        return None
+
+    @classmethod
+    def _merge_adjacent_card_sides(cls, docs: list[dict[str, Any]]) -> list[dict[str, Any]]:
+        """Merge a front-only card page with a back-only card page next to it.
+
+        Both entries must share a code and hold exactly one instance each. A pair is
+        skipped when both holder names are readable and share no word. Everything
+        else passes through unchanged.
+        """
+        merged: list[dict[str, Any]] = []
+        used: set[int] = set()
+        for i, doc in enumerate(docs):
+            if i in used:
+                continue
+            side = cls._single_card_side(doc)
+            if side is None:
+                merged.append(doc)
+                continue
+            for j, other in enumerate(docs):
+                if j == i or j in used:
+                    continue
+                other_side = cls._single_card_side(other)
+                if (
+                    other_side is None
+                    or other_side == side
+                    or other.get("document_code") != doc.get("document_code")
+                    or abs(int(other.get("start_page", 1)) - int(doc.get("start_page", 1))) != 1
+                ):
+                    continue
+                front, back = (doc, other) if side == "front" else (other, doc)
+                front_instance = front["instances"][0]
+                back_instance = back["instances"][0]
+                front_name = cls._normalize_card_name(front_instance.get("front_name"))
+                mrz_name = cls._normalize_card_name(back_instance.get("mrz_name"))
+                # MRZ lines are often misread or cut off, so only reject names
+                # that share no word at all.
+                if front_name and mrz_name and not set(front_name.split()) & set(mrz_name.split()):
+                    continue
+                used.add(j)
+                pages = [int(doc.get("start_page", 1)), int(other.get("start_page", 1))]
+                doc = {
+                    **front,
+                    "start_page": min(pages),
+                    "end_page": max(pages),
+                    "instances": [
+                        {
+                            "identifier": front_instance.get("identifier"),
+                            "front_name": front_instance.get("front_name"),
+                            "mrz_name": back_instance.get("mrz_name"),
+                            "sides": ["front", "back"],
+                        }
+                    ],
+                }
+                logger.info(
+                    f"Merged card front (page {front.get('start_page')}) with back "
+                    f"(page {back.get('start_page')}) for {doc.get('document_code')}"
+                )
+                break
+            merged.append(doc)
+        return merged
+
+    @classmethod
+    def _wrap_unlocated(cls, value: Any, field: Optional[FieldSchema]) -> Any:
+        """Wrap a plain extracted value as ``{"value": ..., "coordinates": None}``."""
+        if field is not None and field.data_type == "array":
+            if not isinstance(value, list):
+                return value
+            children = {child.field_key: child for child in field.child_schema or []}
+            return [
+                {key: cls._wrap_unlocated(item, children.get(key)) for key, item in row.items()}
+                if isinstance(row, dict)
+                else row
+                for row in value
+            ]
+        return {"value": value, "coordinates": None}
+
+    @classmethod
+    def _add_null_coordinates(
+        cls, result: dict[str, Any], schema: Optional[ExtractionSchema]
+    ) -> dict[str, Any]:
+        """Give values the same shape as Gemini-OCR located ones, with null coordinates."""
+        if schema is None:
+            for field in result.get("fields") or []:
+                field["coordinates"] = None
+            for table in result.get("tables") or []:
+                for column in table.get("columns") or []:
+                    column["coordinates"] = None
+                table["rows"] = [
+                    {key: cls._wrap_unlocated(cell, None) for key, cell in row.items()}
+                    for row in table.get("rows") or []
+                ]
+            return result
+        fields = {field.field_key: field for field in schema.fields}
+        return {
+            key: cls._wrap_unlocated(value, fields.get(key))
+            for key, value in result.items()
+        }
+
     async def _process_doc(
         self,
         doc: dict[str, Any],
@@ -520,10 +650,12 @@ class ExtractionService:
                     hint: Optional[dict[str, Any]],
                 ) -> tuple[dict[str, Any], dict[str, int]]:
                     try:
-                        return await self._extract_document_pages(
+                        result, usage = await self._extract_document_pages(
                             pages, schema, extract_all_fields, semaphore, params,
                             instance_hint=hint,
                         )
+                        # Wrapped after chunk merging, which relies on plain null values.
+                        return self._add_null_coordinates(result, schema), usage
                     except Exception as e:
                         logger.error(f"Phase 2 extraction failed for {doc_code}: {e}")
                         return (
@@ -587,7 +719,7 @@ class ExtractionService:
             f"{len(docs)} segment(s)"
         )
 
-        docs = self._merge_same_page_instances(docs)
+        docs = self._merge_adjacent_card_sides(self._merge_same_page_instances(docs))
         if not docs:
             return {"documents": []}
 

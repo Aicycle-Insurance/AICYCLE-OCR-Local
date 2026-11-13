@@ -94,6 +94,13 @@ uvicorn src.extraction.app:app --port 9001   # POST /api/v1/extract
 uvicorn src.app:app --port 9002              # POST /api/v2/ocr/extract_local (file_url -> OCR -> extract)
 ```
 
+Hoặc warmup vLLM OCR + LLM 1 lần rồi mở API `src.app` (port mặc định 9002, đổi bằng `PORT=...`):
+
+```bash
+./start_api.sh                    # = python scripts/warmup.py rồi uvicorn src.app:app
+python scripts/warmup.py          # chỉ warmup
+```
+
 Endpoint `/api/v2/ocr/extract_local` nhận body định dạng Gemini-OCR v2; cần **cả** vLLM OCR và vLLM LLM cùng chạy.
 Chỉ bắt buộc `file_url`; không gửi `extraction_schemas` thì server đọc từ `examples/schemas.json`
 (đọc lại mỗi request, sửa file không cần restart). `include_bbox` được bỏ qua.
