@@ -91,4 +91,17 @@ python evaluate.py --predictions /home/dangdh/work/ocr-local/predictions_preview
 ```bash
 uvicorn src.ocr.app:app --port 9000          # POST /api/v1/ocr (upload file)
 uvicorn src.extraction.app:app --port 9001   # POST /api/v1/extract
+uvicorn src.app:app --port 9002              # POST /api/v2/ocr/extract_local (file_url -> OCR -> extract)
 ```
+
+Endpoint `/api/v2/ocr/extract_local` nhận body định dạng Gemini-OCR v2; cần **cả** vLLM OCR và vLLM LLM cùng chạy.
+Chỉ bắt buộc `file_url`; không gửi `extraction_schemas` thì server đọc từ `examples/schemas.json`
+(đọc lại mỗi request, sửa file không cần restart). `include_bbox` được bỏ qua.
+
+```bash
+curl -X POST localhost:9002/api/v2/ocr/extract -H 'Content-Type: application/json' \
+  -d '{"file_url": "https://.../file.pdf", "extract_all_documents": false}'
+```
+
+Response giống `/api/v1/extract`, thêm `ocr_run_id` (thư mục `data/ocr/`) và `failed_pages` (trang OCR lỗi
+bị bỏ qua khi extract — resume OCR run đó rồi gọi lại `/api/v1/extract` nếu cần).

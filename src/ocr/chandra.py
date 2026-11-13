@@ -1,10 +1,10 @@
 from typing import Any
 
 from loguru import logger
-from markdownify import markdownify
 from PIL import Image
 
 from src.ocr.base import BaseOCR
+from src.ocr.markdown import html_to_markdown
 from src.prompts import CHANDRA_OCR_LAYOUT_PROMPT
 
 
@@ -102,7 +102,7 @@ class ChandraOCR(BaseOCR):
         return super().build_messages(scale_to_fit(image))
 
     def to_markdown(self, raw: str) -> str:
-        return markdownify(raw, heading_style="ATX").strip()
+        return html_to_markdown(raw, heading_style="ATX")
 
     async def generate(self, image: Image.Image) -> tuple[str, str | None, dict[str, int]]:
         messages = self.build_messages(image)

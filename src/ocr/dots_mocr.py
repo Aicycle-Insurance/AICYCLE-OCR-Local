@@ -2,10 +2,10 @@ import json
 from typing import Any
 
 from loguru import logger
-from markdownify import markdownify
 from PIL import Image
 
 from src.ocr.base import BaseOCR
+from src.ocr.markdown import html_to_markdown
 from src.prompts import DOTS_MOCR_LAYOUT_ALL_PROMPT
 
 
@@ -44,7 +44,7 @@ class DotsMOCR(BaseOCR):
             if category == "Formula":
                 items.append(f"$$\n{text}\n$$")
             elif category == "Table":
-                items.append(markdownify(text).strip())
+                items.append(html_to_markdown(text))
             else:
                 items.append(text)
         return "\n\n".join(items)

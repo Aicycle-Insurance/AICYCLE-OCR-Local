@@ -1,9 +1,15 @@
 """Request/response models, port từ Gemini-OCR /api/v2/ocr/extract (bỏ bbox)."""
 
+import json
 import re
 from typing import Any, Dict, List, Literal, Optional
 
 from pydantic import BaseModel, Field, field_validator, model_validator
+
+from src.config import PROJECT_ROOT
+
+# Schema mặc định của endpoint file_url khi body không gửi extraction_schemas
+DEFAULT_SCHEMAS_PATH = PROJECT_ROOT / "examples" / "schemas.json"
 
 
 # Request models
@@ -110,11 +116,10 @@ class PageMarkdown(BaseModel):
     markdown: str
 
 
-class ExtractRequest(BaseModel):
-    """Request body for the schema-driven extraction endpoint.
+class ExtractOptions(BaseModel):
+    """Schemas and options shared by every extraction request.
 
     Attributes:
-        pages: OCR markdown per page (``pages`` of the OCR service response can be passed as-is).
         extraction_schemas: List of document schemas that define what to extract.
         extract_all_fields: If true, include all fields found in each document beyond schema-defined ones.
         extract_all_documents: If true, extract all documents including unknown types not in schema.
@@ -124,7 +129,6 @@ class ExtractRequest(BaseModel):
         top_k: Top-k sampling parameter.
         max_output_tokens: Maximum tokens to generate.
     """
-    pages: List[PageMarkdown]
     extraction_schemas: List[ExtractionSchema]
     extract_all_fields: bool = False
     extract_all_documents: bool = False
@@ -133,16 +137,6 @@ class ExtractRequest(BaseModel):
     top_p: Optional[float] = None
     top_k: Optional[int] = None
     max_output_tokens: Optional[int] = None
-
-    @field_validator("pages")
-    @classmethod
-    def validate_pages(cls, v: List[PageMarkdown]) -> List[PageMarkdown]:
-        if not v:
-            raise ValueError("pages must contain at least one page")
-        page_numbers = [page.page for page in v]
-        if len(set(page_numbers)) != len(page_numbers):
-            raise ValueError("pages must not contain duplicate page numbers")
-        return sorted(v, key=lambda page: page.page)
 
     @field_validator("extraction_schemas")
     @classmethod
@@ -164,6 +158,53 @@ class ExtractRequest(BaseModel):
             duplicate_codes = ", ".join(sorted(duplicates))
             raise ValueError(f"Duplicate document_code values in extraction_schemas: {duplicate_codes}")
         return self
+
+
+class ExtractRequest(ExtractOptions):
+    """Request body for the schema-driven extraction endpoint.
+
+    Attributes:
+        pages: OCR markdown per page (``pages`` of the OCR service response can be passed as-is).
+    """
+    pages: List[PageMarkdown]
+
+    @field_validator("pages")
+    @classmethod
+    def validate_pages(cls, v: List[PageMarkdown]) -> List[PageMarkdown]:
+        if not v:
+            raise ValueError("pages must contain at least one page")
+        page_numbers = [page.page for page in v]
+        if len(set(page_numbers)) != len(page_numbers):
+            raise ValueError("pages must not contain duplicate page numbers")
+        return sorted(v, key=lambda page: page.page)
+
+
+class OCRExtractRequest(ExtractOptions):
+    """Request body for the end-to-end endpoint: download ``file_url`` -> OCR -> extract.
+
+    Attributes:
+        file_url: Publicly accessible HTTP/HTTPS URL of the PDF/image.
+        extraction_schemas: Optional; defaults to the schemas in examples/schemas.json
+            (re-read on every request, so edits apply without restarting the server).
+    """
+    file_url: str
+    extraction_schemas: Optional[List[ExtractionSchema]] = None
+
+    @model_validator(mode="before")
+    @classmethod
+    def default_extraction_schemas(cls, data: Any) -> Any:
+        if isinstance(data, dict) and data.get("extraction_schemas") is None:
+            schemas = json.loads(DEFAULT_SCHEMAS_PATH.read_text(encoding="utf-8"))
+            data = {**data, "extraction_schemas": schemas}
+        return data
+
+    @field_validator("file_url")
+    @classmethod
+    def validate_file_url(cls, v: str) -> str:
+        v = v.strip()
+        if not v.startswith(("http://", "https://")):
+            raise ValueError("file_url must be a valid HTTP/HTTPS URL")
+        return v
 
 
 # Response models
@@ -197,3 +238,14 @@ class ExtractResponse(BaseModel):
     """
     run_id: str
     documents: List[ExtractedDocument]
+
+
+class OCRExtractResponse(ExtractResponse):
+    """Response from the end-to-end endpoint.
+
+    Attributes:
+        ocr_run_id: Folder name under data/ocr/ holding the downloaded file and OCR pages.
+        failed_pages: Pages that failed OCR and were skipped in extraction (resume the OCR run to retry).
+    """
+    ocr_run_id: str
+    failed_pages: List[int]

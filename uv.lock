@@ -613,6 +613,7 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "fastapi" },
+    { name = "httpx" },
     { name = "langfuse" },
     { name = "loguru" },
     { name = "markdownify" },
@@ -630,6 +631,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "fastapi", specifier = ">=0.143.1" },
+    { name = "httpx", specifier = ">=0.28.1" },
     { name = "langfuse", specifier = ">=5.0.1" },
     { name = "loguru", specifier = ">=0.7.3" },
     { name = "markdownify", specifier = ">=1.2.3" },
