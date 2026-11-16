@@ -39,15 +39,17 @@ def _replace_images(soup: BeautifulSoup, image_mode: str) -> None:
     """Xử lý mô tả ảnh: "keep" giữ nguyên, "label" thay bằng nhãn ngắn (VD [Chữ ký]), "remove" bỏ hẳn.
 
     Làm trên cây HTML (còn data-label) để bắt cả đoạn mô tả dài trong khối ảnh và thẻ <img> nằm giữa dòng chữ.
+    Khối ảnh có chữ thật (VD Chandra gắn nhãn Image cho cả thẻ CCCD nhưng vẫn đọc chữ bên trong) thì giữ
+    chữ, chỉ xử lý các thẻ <img> trong đó; mô tả ảnh nằm ở alt nên không tính là chữ.
     """
     if image_mode == "keep":
         return
     if image_mode not in ("label", "remove"):
         raise ValueError(f"image_mode không hợp lệ: {image_mode}")
-    targets = soup.find_all("div", attrs={"data-label": IMAGE_BLOCK_LABELS})
-    targets += [
-        img for img in soup.find_all("img") if not img.find_parent("div", attrs={"data-label": IMAGE_BLOCK_LABELS})
+    blocks = [
+        b for b in soup.find_all("div", attrs={"data-label": IMAGE_BLOCK_LABELS}) if not b.get_text(strip=True)
     ]
+    targets = blocks + [img for img in soup.find_all("img") if not any(img in b.descendants for b in blocks)]
     for el in targets:
         if image_mode == "remove":
             el.decompose()

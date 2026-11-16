@@ -1,0 +1,11 @@
+.git
+.venv
+.claude
+__pycache__
+*.pyc
+.env
+data
+logs
+runs
+request.json
+predictions_preview.json

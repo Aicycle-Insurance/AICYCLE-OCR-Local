@@ -25,6 +25,10 @@ class OCREngineConfig(BaseModel):
     api_key: str = "EMPTY"
     model: str
     timeout: float = 600
+    # Engine stream (chandra): quá số giây này không nhận được token nào thì coi như server treo
+    stall_timeout: float = 120
+    # Engine stream (chandra): max_tokens của mỗi request, trang dài hơn thì viết tiếp ở request sau
+    segment_tokens: int = 2048
     temperature: float = 0.0
     top_p: Optional[float] = None
     max_tokens: int = 8192
@@ -41,6 +45,7 @@ class OCRConfig(BaseModel):
     dpi: int = 200
     max_concurrency: int = 8
     retry: RetryConfig = RetryConfig()
+    circuit_cooldown: float = 120
     engines: dict[str, OCREngineConfig]
 
 
@@ -58,6 +63,12 @@ class LLMConfig(BaseModel):
     extra_body: dict[str, Any] = {}
 
 
+class HealthConfig(BaseModel):
+    interval: float = 10.0
+    timeout: float = 5.0
+    failure_threshold: int = 3
+
+
 class LangfuseConfig(BaseModel):
     enabled: bool = False
     public_key: Optional[str] = None
@@ -69,6 +80,7 @@ class Settings(BaseModel):
     app: AppConfig
     ocr: OCRConfig
     llm: LLMConfig
+    health: HealthConfig = HealthConfig()
     langfuse: LangfuseConfig
 
 

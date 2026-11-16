@@ -13,6 +13,7 @@ import argparse
 import asyncio
 import json
 import sys
+import time
 from pathlib import Path
 
 # Cho phép chạy trực tiếp `python scripts/<file>.py`
@@ -42,15 +43,28 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--ls-url", default="http://127.0.0.1:8001")
     p.add_argument("--upload", action="store_true", help="Đẩy prediction lên LS; mặc định chỉ preview")
     p.add_argument("--out", type=Path, default=Path("predictions_preview.json"))
+    p.add_argument(
+        "--concurrency", type=int, default=1,
+        help="Số task extract cùng lúc (mỗi task tự gọi LLM song song tới LLM_MAX_CONCURRENT_EXTRACTIONS)",
+    )
     return p.parse_args()
 
 
-def load_ocr_pages(run_id: str) -> list[dict]:
+def load_ocr_run(run_id: str) -> tuple[list[dict], float, float]:
+    """Trả về (pages để extract, thời gian OCR, thời gian thực của cả run theo result.json).
+
+    Thời gian OCR = trang lâu nhất (các trang chạy song song), tính từ lúc trang được gửi tới
+    server, không tính lúc chờ slot ``OCR_MAX_CONCURRENCY`` khi chạy nhiều task cùng lúc
+    (``total_seconds`` có tính phần chờ đó nên chỉ ghi lại để tham khảo).
+    """
     path = settings.app.data_dir / "ocr" / run_id / "result.json"
     result = OCRResponse.model_validate_json(path.read_text(encoding="utf-8"))
     if result.failed_pages:
         logger.warning(f"OCR run {run_id}: failed pages {result.failed_pages} are skipped")
-    return [{"page": p.page, "markdown": p.markdown} for p in result.pages if p.error is None]
+    done = [p for p in result.pages if p.error is None]
+    pages = [{"page": p.page, "markdown": p.markdown} for p in done]
+    ocr_seconds = max((p.seconds for p in done), default=0.0)
+    return pages, ocr_seconds, result.total_seconds
 
 
 async def main(args: argparse.Namespace) -> None:
@@ -68,17 +82,22 @@ async def main(args: argparse.Namespace) -> None:
 
     service = ExtractionService()
     previews = []
-    for tid, (run_id, status) in sorted(runs.items()):
+    semaphore = asyncio.Semaphore(args.concurrency)
+
+    async def process(tid: int, run_id: str, status: str) -> None:
         try:
             if status != "completed":
                 logger.warning(f"Task {tid}: OCR run {run_id} is {status}")
-            pages = load_ocr_pages(run_id)
-            response = await service.run(ExtractRequest.model_validate({**options, "pages": pages}))
+            pages, ocr_seconds, ocr_wall_seconds = load_ocr_run(run_id)
+            async with semaphore:
+                t0 = time.perf_counter()
+                response = await service.run(ExtractRequest.model_validate({**options, "pages": pages}))
+                extract_seconds = time.perf_counter() - t0
             code, result = extract_one(response.model_dump(), schemas)
         except Exception as e:
             logger.exception(f"Task {tid}: extract failed: {e}")
             print(f"[SKIP] {tid}: {e}")
-            continue
+            return
 
         prediction = {
             "task": tid,
@@ -86,15 +105,45 @@ async def main(args: argparse.Namespace) -> None:
             "model_version": args.model_version,
             "result": result,
         }
-        previews.append(prediction)
-        print(f"[OK] task={tid} document_code={code} fields={len(result) - 1} extraction_run={response.run_id}")
+        # Latency = OCR + extract (chạy tách 2 bước); model local nên cost = 0.
+        # Các trường này chỉ có trong preview, không upload lên LS (giống run.py cũ).
+        latency = ocr_seconds + extract_seconds
+        previews.append({
+            **prediction,
+            "latency_s": round(latency, 3),
+            "cost_usd": 0.0,
+            "ocr_s": round(ocr_seconds, 3),
+            "extract_s": round(extract_seconds, 3),
+            "ocr_wall_s": round(ocr_wall_seconds, 3),  # có tính thời gian chờ slot, chỉ để tham khảo
+        })
+        print(
+            f"[OK] task={tid} document_code={code} fields={len(result) - 1} extraction_run={response.run_id}"
+            f" latency={latency:.2f}s (ocr={ocr_seconds:.2f}s extract={extract_seconds:.2f}s"
+            f" ocr_wall={ocr_wall_seconds:.2f}s)"
+        )
         if ls is not None:
-            resp = ls.post(f"{ls.base}/api/predictions/", json=prediction, timeout=60)
-            resp.raise_for_status()
+            try:
+                async with upload_lock:  # LSSession (requests) dùng chung, upload lần lượt
+                    resp = await asyncio.to_thread(
+                        ls.post, f"{ls.base}/api/predictions/", json=prediction, timeout=60
+                    )
+                resp.raise_for_status()
+            except Exception as e:
+                # Không để 1 task upload lỗi làm mất preview của các task khác
+                logger.exception(f"Task {tid}: upload failed: {e}")
+                print(f"[UPLOAD ERROR] task={tid}: {e}")
+                return
             print(f"[UPLOADED] task={tid} prediction_id={resp.json().get('id')}")
 
+    upload_lock = asyncio.Lock()
+    started = time.perf_counter()
+    await asyncio.gather(*(process(tid, run_id, status) for tid, (run_id, status) in sorted(runs.items())))
+    previews.sort(key=lambda p: p["task"])
     args.out.write_text(json.dumps(previews, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"Preview: {args.out}; predictions={len(previews)}/{len(runs)}; uploaded={args.upload}")
+    print(
+        f"Preview: {args.out}; predictions={len(previews)}/{len(runs)}; uploaded={args.upload}; "
+        f"{time.perf_counter() - started:.1f}s"
+    )
 
 
 if __name__ == "__main__":

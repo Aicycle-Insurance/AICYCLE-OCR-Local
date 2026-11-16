@@ -1,0 +1,26 @@
+# Chạy: docker compose up -d --build     Log: docker compose logs -f api
+services:
+  api:
+    build: .
+    image: ocr-local:latest
+    container_name: ocr-local-api
+    restart: unless-stopped
+    ports:
+      - "${PORT:-9006}:9006"
+    env_file: .env
+    environment:
+      # Trong container "localhost" là chính container. vLLM publish cổng ra máy host
+      # (docker run -p 8000:8000) thì gọi qua host.docker.internal.
+      CHANDRA_BASE_URL: ${CHANDRA_BASE_URL_DOCKER:-http://host.docker.internal:8000/v1}
+      DOTS_MOCR_BASE_URL: ${DOTS_MOCR_BASE_URL_DOCKER:-http://host.docker.internal:8001/v1}
+      LLM_BASE_URL: ${LLM_BASE_URL_DOCKER:-http://host.docker.internal:10100/v1}
+      PORT: "9006"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+      # Giờ trong log theo giờ máy host thay vì UTC
+      - /etc/localtime:/etc/localtime:ro
+      # Sửa schema mặc định không cần build lại image
+      - ./examples:/app/examples:ro

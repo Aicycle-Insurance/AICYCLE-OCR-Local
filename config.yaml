@@ -10,21 +10,31 @@ ocr:
   # Engine OCR được dùng: chandra | dots_mocr
   engine: ${OCR_ENGINE:chandra}
   dpi: ${OCR_DPI:200}
+  # Tổng số request đang gửi tới vLLM OCR của cả process (dùng chung cho mọi file đang xử lý)
   max_concurrency: ${OCR_MAX_CONCURRENCY:8}
-  # Retry mỗi trang khi lỗi (timeout, mất kết nối, 5xx...), delay tăng gấp đôi sau mỗi lần
+  # Retry mỗi trang khi lỗi (mất kết nối, 5xx...), delay tăng gấp đôi sau mỗi lần
   retry:
     max_attempts: ${OCR_RETRY_MAX_ATTEMPTS:3}
     initial_delay: ${OCR_RETRY_INITIAL_DELAY:2.0}
     max_delay: ${OCR_RETRY_MAX_DELAY:30.0}
+  # Request bị timeout (server không trả token, xem stall_timeout) thì không retry mà ngừng gửi request
+  # mới trong chừng này giây; các trang trong lúc đó báo lỗi ngay, resume sau. 0 = tắt (retry như lỗi khác)
+  circuit_cooldown: ${OCR_CIRCUIT_COOLDOWN:120}
   engines:
     chandra:
       base_url: ${CHANDRA_BASE_URL:http://localhost:8000/v1}
       api_key: ${CHANDRA_API_KEY:EMPTY}
       model: ${CHANDRA_MODEL:chandra}
       timeout: ${CHANDRA_TIMEOUT:600}
+      # Quá số giây này không nhận được token nào (kể cả lúc chờ token đầu) thì ngắt request và retry
+      stall_timeout: ${CHANDRA_STALL_TIMEOUT:120}
       temperature: 0.0
       top_p: 0.1
-      max_tokens: 20000
+      # Tổng token output tối đa của 1 trang
+      max_tokens: 16000
+      # max_tokens của mỗi request; trang dài hơn thì viết tiếp ở request sau. Request bị ngắt (cắt lặp)
+      # có thể vẫn chạy tiếp trên vLLM (VD đi qua SSH tunnel), giới hạn này chặn mức GPU bị phí
+      segment_tokens: ${CHANDRA_SEGMENT_TOKENS:2048}
     dots_mocr:
       base_url: ${DOTS_MOCR_BASE_URL:http://localhost:8001/v1}
       api_key: ${DOTS_MOCR_API_KEY:EMPTY}
@@ -50,6 +60,14 @@ llm:
   # Truyền thẳng vào extra_body của vLLM, ví dụ tắt thinking:
   # chat_template_kwargs: {enable_thinking: false}
   extra_body: {}
+
+# API src.app check /health của vLLM OCR + LLM định kỳ, warmup khi model vừa bật
+health:
+  interval: ${HEALTH_CHECK_INTERVAL:10}
+  timeout: ${HEALTH_CHECK_TIMEOUT:5}
+  # Model đang ready chỉ bị coi là down (và warmup lại khi OK) sau chừng này lượt check lỗi liên tiếp,
+  # để 1 lượt timeout lẻ (VD đường truyền nghẽn lúc gửi ảnh) không gây warmup thừa
+  failure_threshold: ${HEALTH_CHECK_FAILURE_THRESHOLD:3}
 
 langfuse:
   enabled: ${LANGFUSE_ENABLED:false}

@@ -21,4 +21,5 @@ def get_ocr_engine(name: str | None = None) -> BaseOCR:
         dpi=settings.ocr.dpi,
         max_concurrency=settings.ocr.max_concurrency,
         retry=settings.ocr.retry,
+        circuit_cooldown=settings.ocr.circuit_cooldown,
     )

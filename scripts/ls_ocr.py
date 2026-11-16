@@ -10,6 +10,7 @@ Sau đó chạy scripts/ls_extract.py với file txt này (khi đã serve LLM).
 import argparse
 import asyncio
 import sys
+import time
 from pathlib import Path
 
 # Cho phép chạy trực tiếp `python scripts/<file>.py`
@@ -37,6 +38,10 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--task-id", type=int, help="Chỉ OCR 1 task; mặc định tất cả task của project")
     p.add_argument("--engine", help="chandra | dots_mocr (mặc định theo config)")
     p.add_argument("--out", type=Path, default=Path("ocr_runs.txt"), help="File txt lưu task_id -> run_id")
+    p.add_argument(
+        "--concurrency", type=int, default=1,
+        help="Số task (file) OCR cùng lúc; tổng request tới vLLM vẫn giới hạn bởi OCR_MAX_CONCURRENCY",
+    )
     return p.parse_args()
 
 
@@ -46,31 +51,39 @@ async def main(args: argparse.Namespace) -> None:
     tasks = get_tasks(ls, base, args.project_id, args.task_id)
     engine = get_ocr_engine(args.engine)
     runs = read_runs(args.out)
-    logger.info(f"{len(tasks)} task(s), engine={engine.name}, {len(runs)} already in {args.out}")
+    logger.info(
+        f"{len(tasks)} task(s), engine={engine.name}, {len(runs)} already in {args.out}, "
+        f"concurrency={args.concurrency}"
+    )
 
     counts = {"completed": 0, "partial": 0, "skipped": 0, "error": 0}
-    for task in tasks:
+    semaphore = asyncio.Semaphore(args.concurrency)
+    download_lock = asyncio.Lock()  # LSSession (requests) dùng chung, tải lần lượt cho an toàn
+
+    async def process(task: dict) -> None:
         tid = task["id"]
         if task.get("project") is not None and task["project"] != args.project_id:
             print(f"[SKIP] {tid}: other project")
             counts["skipped"] += 1
-            continue
+            return
         previous = runs.get(tid)
         if previous and previous[1] == "completed":
             print(f"[SKIP] {tid}: already OCR'd (run {previous[0]})")
             counts["skipped"] += 1
-            continue
-        try:
-            if previous:
-                result = await engine.resume(previous[0])
-            else:
-                file_bytes, file_name = download_task_file(ls, base, task)
-                result = await engine.run(file_bytes, file_name)
-        except Exception as e:
-            logger.exception(f"Task {tid}: OCR failed: {e}")
-            print(f"[ERROR] {tid}: {e}")
-            counts["error"] += 1
-            continue
+            return
+        async with semaphore:
+            try:
+                if previous:
+                    result = await engine.resume(previous[0])
+                else:
+                    async with download_lock:
+                        file_bytes, file_name = await asyncio.to_thread(download_task_file, ls, base, task)
+                    result = await engine.run(file_bytes, file_name)
+            except Exception as e:
+                logger.exception(f"Task {tid}: OCR failed: {e}")
+                print(f"[ERROR] {tid}: {e}")
+                counts["error"] += 1
+                return
 
         runs[tid] = (result.run_id, result.status)
         write_runs(args.out, runs)  # ghi sau mỗi task để dừng giữa chừng vẫn giữ kết quả
@@ -80,7 +93,9 @@ async def main(args: argparse.Namespace) -> None:
             f"pages={result.page_count} failed={result.failed_pages} {result.total_seconds:.1f}s"
         )
 
-    print(f"\nDone: {counts} -> {args.out}")
+    started = time.perf_counter()
+    await asyncio.gather(*(process(task) for task in tasks))
+    print(f"\nDone in {time.perf_counter() - started:.1f}s: {counts} -> {args.out}")
 
 
 if __name__ == "__main__":

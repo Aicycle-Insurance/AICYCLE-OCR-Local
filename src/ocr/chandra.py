@@ -1,3 +1,4 @@
+import asyncio
 from typing import Any
 
 from loguru import logger
@@ -109,31 +110,39 @@ class ChandraOCR(BaseOCR):
         usage = {"input": 0, "output": 0, "total": 0}
         text, finish_reason = "", None
         max_continues = len(self.continue_temperatures)
-        for attempt in range(max_continues + 1):
-            # max_tokens là tổng cho cả trang, để prefix + phần viết tiếp không vượt context
+        repeats = 0
+        while True:
+            # max_tokens là tổng cho cả trang, để prefix + phần viết tiếp không vượt context.
+            # Mỗi request chỉ xin tối đa segment_tokens: request bị ngắt mà vLLM không hủy
+            # (VD đi qua SSH tunnel) thì cũng chỉ chạy thừa tối đa chừng đó token.
             remaining = self.config.max_tokens - usage["output"]
             if remaining <= 0:
                 finish_reason = "length"
                 break
-            params = {**self._model_parameters, "max_tokens": remaining}
-            if attempt > 0:
-                params["temperature"] = self.continue_temperatures[attempt - 1]
+            params = {**self._model_parameters, "max_tokens": min(remaining, self.config.segment_tokens)}
+            if repeats > 0:
+                params["temperature"] = self.continue_temperatures[repeats - 1]
                 params["top_p"] = self.continue_top_p
             text, finish_reason, step_usage = await self._stream_once(messages, text, params)
             for key in usage:
                 usage[key] += step_usage[key]
+            if finish_reason == "length":
+                # Hết segment (hoặc hết tổng max_tokens -> vòng sau dừng): viết tiếp nguyên văn
+                logger.info(f"[{self.name}] segment done at {len(text)} chars, continue")
+                continue
             if finish_reason != "repeat":
                 break
 
             start = _repeat_start(text, self.repeat_base)
             if start is not None:
                 text = text[:start]
-            if attempt == max_continues:
+            if repeats == max_continues:
                 break
+            repeats += 1
             logger.warning(
                 f"[{self.name}] repeat after {len(text)} chars, cut and continue "
-                f"({attempt + 1}/{max_continues}, "
-                f"temperature={self.continue_temperatures[attempt]})"
+                f"({repeats}/{max_continues}, "
+                f"temperature={self.continue_temperatures[repeats - 1]})"
             )
             last_row = text.rfind("</tr>")
             if text.count("<table") > text.count("</table>") and last_row != -1:
@@ -148,38 +157,59 @@ class ChandraOCR(BaseOCR):
         self, messages: list[dict[str, Any]], prefix: str, params: dict[str, Any]
     ) -> tuple[str, str | None, dict[str, int]]:
         """Stream 1 request (viết tiếp từ ``prefix`` nếu có); finish_reason = "repeat" khi
-        phát hiện lặp và đã ngắt request."""
+        phát hiện lặp (phần sinh sau đó bị bỏ).
+
+        Quá ``stall_timeout`` giây không nhận được chunk nào (kể cả lúc chờ chunk đầu) thì
+        ngắt request và raise ``TimeoutError`` để retry, không chờ tới ``timeout`` của client.
+        """
         extra_body = None
         if prefix:
             messages = [*messages, {"role": "assistant", "content": prefix}]
             extra_body = {"continue_final_message": True, "add_generation_prompt": False}
-        stream = await self.client.chat.completions.create(
-            model=self.config.model,
-            messages=messages,
-            **params,
-            stream=True,
-            stream_options={"include_usage": True},
-            extra_body=extra_body,
-        )
 
         text, last_check, finish_reason = prefix, len(prefix), None
-        chunks, usage = 0, None
-        async for chunk in stream:
-            if chunk.usage:
-                usage = chunk.usage
-            if not chunk.choices:
-                continue
-            choice = chunk.choices[0]
-            if choice.delta.content:
-                text += choice.delta.content
-                chunks += 1
-            finish_reason = choice.finish_reason or finish_reason
-            if len(text) - last_check >= self.check_every:
-                last_check = len(text)
-                if _repeat_start(text, self.repeat_base) is not None:
-                    await stream.close()  # ngắt kết nối -> vLLM hủy request, giải phóng GPU
-                    finish_reason = "repeat"
-                    break
+        chunks, usage, stream = 0, None, None
+        # Phát hiện lặp thì không ngắt kết nối mà đọc nốt (bỏ phần thừa) tới hết segment: ngắt kết nối
+        # không chắc vLLM hủy request (VD qua SSH tunnel) và request mới gửi ngay sẽ chạy song song
+        # với request cũ. Đọc nốt thì số request mình chiếm trên server không bao giờ vượt concurrency.
+        draining = False
+        stall = self.config.stall_timeout
+        loop = asyncio.get_running_loop()
+        try:
+            async with asyncio.timeout(stall) as deadline:
+                stream = await self.client.chat.completions.create(
+                    model=self.config.model,
+                    messages=messages,
+                    **params,
+                    stream=True,
+                    stream_options={"include_usage": True},
+                    extra_body=extra_body,
+                )
+                async for chunk in stream:
+                    deadline.reschedule(loop.time() + stall)
+                    if chunk.usage:
+                        usage = chunk.usage
+                    if not chunk.choices:
+                        continue
+                    choice = chunk.choices[0]
+                    if draining:
+                        continue
+                    if choice.delta.content:
+                        text += choice.delta.content
+                        chunks += 1
+                    finish_reason = choice.finish_reason or finish_reason
+                    if len(text) - last_check >= self.check_every:
+                        last_check = len(text)
+                        if _repeat_start(text, self.repeat_base) is not None:
+                            finish_reason = "repeat"
+                            draining = True
+        except TimeoutError as e:
+            if stream is not None:
+                await stream.close()
+            raise TimeoutError(
+                f"no token from server for {stall:.0f}s after {len(text) - len(prefix)} new chars "
+                "(vLLM overloaded or stuck?)"
+            ) from e
 
         if usage:
             return text, finish_reason, {

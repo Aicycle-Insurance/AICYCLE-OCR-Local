@@ -8,7 +8,7 @@ from typing import Any, ClassVar
 
 import pymupdf
 from loguru import logger
-from openai import AsyncOpenAI, BadRequestError
+from openai import APITimeoutError, AsyncOpenAI, BadRequestError
 from PIL import Image
 
 from src.config import OCREngineConfig, RetryConfig, settings
@@ -36,11 +36,20 @@ class BaseOCR(ABC):
         dpi: int,
         max_concurrency: int,
         retry: RetryConfig,
+        circuit_cooldown: float = 0,
     ):
         self.config = config
         self.dpi = dpi
         self.max_concurrency = max_concurrency
         self.retry = retry
+        # Dùng chung cho mọi run của engine: tổng request đang gửi tới vLLM (kể cả khi API nhận
+        # nhiều file cùng lúc) không vượt max_concurrency
+        self._semaphore = asyncio.Semaphore(max_concurrency)
+        # Server không trả token quá lâu (quá tải/treo) thì ngừng gửi request mới trong
+        # circuit_cooldown giây: trang trong thời gian đó báo lỗi ngay (resume sau), không retry
+        # dồn thêm request vào server đang kẹt
+        self.circuit_cooldown = circuit_cooldown
+        self._circuit_open_until = 0.0
         # Retry do BaseOCR tự xử lý theo từng trang
         self.client = AsyncOpenAI(
             base_url=config.base_url,
@@ -151,6 +160,10 @@ class BaseOCR(ABC):
         """OCR 1 trang có retry; hết lượt thì trả về OCRPage có ``error`` (raw = None)."""
         delay = self.retry.initial_delay
         for attempt in range(1, self.retry.max_attempts + 1):
+            wait = self._circuit_open_until - time.monotonic()
+            if wait > 0:
+                error = RuntimeError(f"OCR server paused for {wait:.0f}s after a stalled request")
+                break
             try:
                 raw, result = await self.ocr_page(page, image)
                 result.attempts = attempt
@@ -159,6 +172,19 @@ class BaseOCR(ABC):
                 # Request sai (ảnh quá lớn, vượt context...) thì retry cũng không khỏi
                 error = e
                 break
+            except (TimeoutError, APITimeoutError) as e:
+                # Server không trả token: retry chỉ dồn thêm request vào server đang kẹt
+                error = e
+                if self.circuit_cooldown > 0:
+                    self._circuit_open_until = time.monotonic() + self.circuit_cooldown
+                    logger.error(
+                        f"[{self.name}] page {page}: {type(e).__name__}: {e}; "
+                        f"pause new requests for {self.circuit_cooldown:.0f}s"
+                    )
+                    break
+                if attempt < self.retry.max_attempts:
+                    await asyncio.sleep(delay)
+                    delay = min(delay * 2, self.retry.max_delay)
             except Exception as e:
                 error = e
                 if attempt < self.retry.max_attempts:
@@ -242,10 +268,9 @@ class BaseOCR(ABC):
             images = await asyncio.to_thread(self.load_images, file_bytes)
             todo = [(i, image) for i, image in enumerate(images, 1) if i not in pages]
             save_result("running")
-            semaphore = asyncio.Semaphore(self.max_concurrency)
 
             async def ocr_one(page: int, image: Image.Image) -> None:
-                async with semaphore:
+                async with self._semaphore:
                     raw, result = await self.ocr_page_with_retry(page, image)
                 if raw is not None:
                     write_text(run_dir / "pages" / f"page_{page:04d}{self.raw_suffix}", raw)

@@ -2,10 +2,14 @@
 
 Cần cả vLLM OCR (engine theo OCR_ENGINE) và vLLM LLM cùng chạy.
 Kết quả lưu như chạy từng bước: data/ocr/{ocr_run_id}/ và data/extraction/{run_id}/.
+Server check health 2 model định kỳ và tự warmup model nào vừa sẵn sàng (xem src/warmup.py).
 """
 
+import asyncio
+import contextlib
 from contextlib import asynccontextmanager
 
+import httpx
 from fastapi import FastAPI, HTTPException
 from loguru import logger
 
@@ -16,10 +20,12 @@ from src.extraction.service import ExtractionService, InvalidModelResponseError
 from src.logger import setup_logger
 from src.ocr import get_ocr_engine
 from src.tracing import shutdown_langfuse
+from src.warmup import ModelWatcher, warmup_llm, warmup_ocr
 
 setup_logger("pipeline_service")
 engine = get_ocr_engine()
 service = ExtractionService()
+watchers: list[ModelWatcher] = []
 
 
 @asynccontextmanager
@@ -28,9 +34,31 @@ async def lifespan(_: FastAPI):
         f"Pipeline service started with OCR engine={engine.name}, model={engine.config.model}, "
         f"LLM model={settings.llm.model}"
     )
+    http = httpx.AsyncClient(timeout=settings.health.timeout)
+    lock = asyncio.Lock()
+    watchers[:] = [
+        ModelWatcher(
+            f"ocr:{engine.name}", engine.config.base_url, engine.config.model,
+            engine.config.api_key, lambda: warmup_ocr(engine), http, lock,
+        ),
+        ModelWatcher(
+            "llm", settings.llm.base_url, settings.llm.model,
+            settings.llm.api_key, lambda: warmup_llm(service), http, lock,
+        ),
+    ]
+    tasks = [
+        asyncio.create_task(w.run(settings.health.interval, settings.health.failure_threshold))
+        for w in watchers
+    ]
     try:
         yield
     finally:
+        for task in tasks:
+            task.cancel()
+        for task in tasks:
+            with contextlib.suppress(asyncio.CancelledError):
+                await task
+        await http.aclose()
         shutdown_langfuse()
         await logger.complete()
 
@@ -40,11 +68,16 @@ app = FastAPI(title="Local OCR + Extraction Service", lifespan=lifespan)
 
 @app.get("/health")
 async def health_check():
+    """API luôn ``healthy`` khi còn chạy (model tắt không làm restart container); trạng thái model ở ``models``."""
     return {
         "status": "healthy",
         "engine": engine.name,
         "ocr_model": engine.config.model,
         "llm_model": settings.llm.model,
+        "models": {
+            w.name: {"status": w.status, **({"detail": w.detail} if w.detail else {})}
+            for w in watchers
+        },
     }
 
 
