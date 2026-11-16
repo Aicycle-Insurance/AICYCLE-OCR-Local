@@ -23,7 +23,7 @@ ocr:
   engines:
     chandra:
       base_url: ${CHANDRA_BASE_URL:http://localhost:8000/v1}
-      api_key: ${CHANDRA_API_KEY:EMPTY}
+      api_key: ${CHANDRA_API_KEY:abc}
       model: ${CHANDRA_MODEL:chandra}
       timeout: ${CHANDRA_TIMEOUT:600}
       # Quá số giây này không nhận được token nào (kể cả lúc chờ token đầu) thì ngắt request và retry
@@ -37,7 +37,7 @@ ocr:
       segment_tokens: ${CHANDRA_SEGMENT_TOKENS:2048}
     dots_mocr:
       base_url: ${DOTS_MOCR_BASE_URL:http://localhost:8001/v1}
-      api_key: ${DOTS_MOCR_API_KEY:EMPTY}
+      api_key: ${DOTS_MOCR_API_KEY:abc}
       model: ${DOTS_MOCR_MODEL:rednote-hilab/dots.mocr}
       timeout: ${DOTS_MOCR_TIMEOUT:600}
       temperature: 0.1
@@ -46,7 +46,7 @@ ocr:
 
 llm:
   base_url: ${LLM_BASE_URL:http://localhost:10100/v1}
-  api_key: ${LLM_API_KEY:EMPTY}
+  api_key: ${LLM_API_KEY:abc}
   model: ${LLM_MODEL:nvidia/Gemma-4-26B-A4B-NVFP4}
   timeout: ${LLM_TIMEOUT:600}
   temperature: ${LLM_TEMPERATURE:0.0}
@@ -56,7 +56,7 @@ llm:
   # Số request extraction (phase 2) chạy song song
   max_concurrent_extractions: ${LLM_MAX_CONCURRENT_EXTRACTIONS:3}
   # Số trang mỗi lần gọi phase 2 cho tài liệu dài có bảng (0 = tắt)
-  table_chunk_pages: ${LLM_TABLE_CHUNK_PAGES:2}
+  table_chunk_pages: ${LLM_TABLE_CHUNK_PAGES:4}
   # Truyền thẳng vào extra_body của vLLM, ví dụ tắt thinking:
   # chat_template_kwargs: {enable_thinking: false}
   extra_body: {}

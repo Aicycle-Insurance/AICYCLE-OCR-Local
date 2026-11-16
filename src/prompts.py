@@ -107,7 +107,7 @@ Analyze the OCR text of the entire file, which may contain multiple distinct doc
 </task>
 
 <document_schemas>
-The following document types may be present in this file. Each entry includes the document_code.
+The following document types may be present in this file. Each entry includes the document_code, its name, and the fields / table columns that type contains.
 {schema_description}
 </document_schemas>
 
@@ -115,6 +115,10 @@ The following document types may be present in this file. Each entry includes th
 1. MERGE pages into one document if: content is sequential/continuing, table rows continue from previous page, or pagination markers exist (e.g., "Trang 2/3").
 2. SPLIT into separate documents if: a new document header appears (e.g., Hospital name, "HÓA ĐƠN", "CỘNG HÒA XÃ HỘI...") with no continuity markers.
 3. `start_page` and `end_page` MUST be page numbers taken from the <page number="N"> tags.
+4. CLASSIFY each document by its title AND its content. Titles can be generic or look alike across types (e.g. "BẢNG KÊ CHI PHÍ", "BẢNG KÊ VIỆN PHÍ", "Bảng kê chi phí phát sinh"), so never decide from a similar-sounding name alone:
+   - The title words must fit the type name: a title containing "VIỆN PHÍ" fits a "viện phí" type, a title "BẢNG KÊ CHI PHÍ ..." fits a "chi phí" type, not the other way round.
+   - The table is the strongest signal: compare the document's table column headers with each type's table columns and pick the type whose columns match. E.g. headers "Tên dịch vụ, Đơn vị, Số lượng, Đơn giá, BHYT chi trả, Nguồn khác" match a table with item_name, unit, quantity, unit_price, hi_fund_paid, other_source_paid; a table with only dates and amounts matches a type whose table has only date and amount columns.
+   - Also compare the labels and sections present in the OCR text with each type's fields.
 </guidelines>
 
 <critical_rules>
@@ -122,7 +126,8 @@ The following document types may be present in this file. Each entry includes th
 </critical_rules>
 
 <output_requirements>
-Do NOT extract any specific data fields. ONLY return the structured array of identified documents with `document_code`, `start_page`, and `end_page` (and suggested fields if unknown).
+Do NOT extract any specific data fields. ONLY return the structured array of identified documents with `title`, `document_code`, `start_page`, and `end_page` (and suggested fields if unknown).
+For each document, FIRST write `title`: its main heading copied verbatim from the OCR text. THEN choose `document_code` by matching that title and the document's content against the document types above (guideline 4).
 
 **Same-page instances (CRITICAL)**
 - Vietnamese CCCD/CMND: analyze each page independently and return one document entry per document_code per page (start_page == end_page).
@@ -130,6 +135,7 @@ Do NOT extract any specific data fields. ONLY return the structured array of ide
 - `instances` lists every distinct logical document of that code on the page. Each instance has an `identifier`: a short text copied verbatim from the OCR text that uniquely identifies that document (e.g. ID/document number, holder name, invoice number).
 - Each instance has `sides`: the sides of that document visible on this page, `front` and/or `back` for CCCD/CMND, `single` for everything else.
 - For CCCD/CMND, the front side has the photo-side fields (name, ID number, date of birth) and the back side has the MRZ lines. If at least one front exists, the number of instances equals the number of fronts; two fronts are NEVER one instance.
+- A page or card showing "Đặc điểm nhận dạng / Personal identification", issue date, the issuing authority ("CỤC TRƯỞNG CỤC CẢNH SÁT...", "BỘ CÔNG AN"), fingerprints or MRZ lines but NO printed holder name with ID number and date of birth is a `back`, never a `front`. `front_name` MUST be copied from a printed "Họ và tên / Full name" on that page; if the page has none, `front_name` is null (never guess a name).
 - Match a back to a front only when the normalized printed front name equals the normalized MRZ name (uppercase, no Vietnamese accents, `Đ` -> `D`, `<` -> space). A matched front and back form one instance; when fronts exist, an unmatched back does not create another instance. If only backs exist, each back is one instance.
 - `front_name` is the printed holder name from the front, otherwise null. `mrz_name` is the raw MRZ holder-name line from the matched back, otherwise null.
 </output_requirements>
@@ -161,10 +167,19 @@ You have been provided the OCR text of a specific chunk of a document (`start_pa
     If a value lacks a matching label or the label is functionally blank, treat the field as null.
 </guidelines>
 
+<value_format>
+Unless the field Hint asks for something else:
+- Text values: copy the value as printed. Keep units and symbols that belong to the value ("37 °C", "67 kg", "120/70 mmHg"). Do not shorten, summarize or paraphrase, and do not drop the part of a value that continues on the next line (e.g. a title whose second line is "TỰ CHI TRẢ"). Do not add anything that is not part of the value itself: no labels, translations or explanations.
+- Fix only obvious OCR misspellings of common Vietnamese words (e.g. "CĂN CỨỘC" → "CĂN CƯỚC"); never alter names, codes or numbers.
+- Date fields (field_key contains "date", or data_type date): write DD/MM/YYYY with zero padding, e.g. "ngày 19 tháng 5 năm 2025" → "19/05/2025", "14 giờ 33 phút, ngày 09 tháng 01 năm 2024" → "09/01/2024". If only a year is printed, write YYYY. If the value is printed as a numeric date with a time (e.g. "15/05/2025 10:23"), keep it as printed.
+- Code fields (ICD codes, ID numbers...): only the codes themselves, without their descriptions.
+</value_format>
+
 <strict_type_coercion>
 Convert all extracted values to the correct data type:
-- string: Plain text, no conversion needed.
+- string: Plain text as described in <value_format>.
 - number: A pure numeric value. Strip all currency symbols, units, and thousand separators. Example: "1.500.000 VNĐ" → 1500000, "2,5" → 2.5. Must be a JSON number, NOT a string.
+  In Vietnamese documents "." and "," are usually THOUSAND separators: a separator followed by exactly 3 digits groups thousands ("113.500" → 113500, "2,750,000" → 2750000, "739.480" → 739480). Treat it as a decimal point only when it is followed by 1-2 digits or by a different separator ("2,5" → 2.5, "845,25" → 845.25, "6.668,24" → 6668.24).
 - boolean: Must be JSON true or false. Convert: "Có"/"Yes"/"X" → true, "Không"/"No"/ empty → false.
 - array: A JSON array of objects. Each object must follow the child_schema structure with exact field_keys.
 </strict_type_coercion>
@@ -211,16 +226,27 @@ def build_document_input(pages: list[tuple[int, str]]) -> str:
     )
 
 
+def _phase1_schema_entry(schema: ExtractionSchema) -> str:
+    """1 loại tài liệu cho Phase 1: tên, các field và cột bảng để LLM so với nội dung thật khi
+    tiêu đề mơ hồ (VD "BẢNG KÊ CHI PHÍ" giữa bảng kê chi phí KCB, bảng kê viện phí, bảng kê tự lập)."""
+    lines = [f'- document_code: "{schema.document_code}" | Name: {schema.document_name}']
+    scalars = [f.field_key for f in schema.fields if f.data_type != "array"]
+    if scalars:
+        lines.append(f"  Fields: {', '.join(scalars)}")
+    for field in schema.fields:
+        if field.data_type == "array":
+            columns = ", ".join(child.field_key for child in field.child_schema or [])
+            lines.append(f"  Table {field.field_key}: {columns}")
+    return "\n".join(lines)
+
+
 def build_phase1_prompt(
     extraction_schemas: list[ExtractionSchema] | None = None,
     extract_all_documents: bool = False,
 ) -> str:
     """Generates a prompt for Phase 1: Segmentation and Classification."""
     if extraction_schemas:
-        schema_description = "\n".join(
-            f'- document_code: "{schema.document_code}" | Name: {schema.document_name}'
-            for schema in extraction_schemas
-        )
+        schema_description = "\n".join(_phase1_schema_entry(schema) for schema in extraction_schemas)
     else:
         schema_description = "None provided. Treat all documents as undefined."
 

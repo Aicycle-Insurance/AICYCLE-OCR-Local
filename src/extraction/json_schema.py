@@ -171,6 +171,12 @@ def build_phase1_response_schema(
         doc_code_schema["enum"] = valid_codes
 
     properties: Dict[str, Any] = {
+        # Đứng trước document_code: model chép tiêu đề trước rồi mới chọn loại (suy luận ngắn
+        # thay cho thinking), tránh chọn loại chỉ theo ấn tượng ở token đầu tiên
+        "title": {
+            "type": "string",
+            "description": "Main heading of the document copied verbatim from the OCR text (e.g. 'BẢNG KÊ CHI PHÍ'), empty string if there is none.",
+        },
         "document_code": doc_code_schema,
         "document_name": {
             "type": "string",
@@ -179,7 +185,7 @@ def build_phase1_response_schema(
         "start_page": {"type": "integer"},
         "end_page": {"type": "integer"},
     }
-    required_fields = ["document_code", "document_name", "start_page", "end_page"]
+    required_fields = ["title", "document_code", "document_name", "start_page", "end_page"]
 
     # Several same-code documents on one page (e.g. 2 CCCD of 2 people).
     # Without bbox, each instance is identified by text taken from the OCR output.
