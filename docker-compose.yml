@@ -11,9 +11,9 @@ services:
     environment:
       # Trong container "localhost" là chính container. vLLM publish cổng ra máy host
       # (docker run -p 8000:8000) thì gọi qua host.docker.internal.
-      CHANDRA_BASE_URL: ${CHANDRA_BASE_URL_DOCKER:-http://host.docker.internal:8000/v1}
-      DOTS_MOCR_BASE_URL: ${DOTS_MOCR_BASE_URL_DOCKER:-http://host.docker.internal:8001/v1}
-      LLM_BASE_URL: ${LLM_BASE_URL_DOCKER:-http://host.docker.internal:10100/v1}
+      CHANDRA_BASE_URL: ${CHANDRA_BASE_URL_DOCKER:-https://demo-llm-gateway.aicycle.ai/ocr/v1}
+      DOTS_MOCR_BASE_URL: ${DOTS_MOCR_BASE_URL_DOCKER:-https://demo-llm-gateway.aicycle.ai/mocr/v1}
+      LLM_BASE_URL: ${LLM_BASE_URL_DOCKER:-https://demo-llm-gateway.aicycle.ai/llm/v1}
       PORT: "9006"
     extra_hosts:
       - "host.docker.internal:host-gateway"
